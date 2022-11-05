@@ -11,13 +11,6 @@ import {
 import axios from 'axios';
 // import SignUp from './SignUp.jsx';
 
-// ! Do we want Login to be its own page?
-// ! What if a user doesn't have an account yet?
-// ! Do we want to just use a modal to have them sign up, or redirect them to a new page?
-// ! How do we pass on user information to the home page
-
-// TODO What if instead of having distinct pages be components, we compartmentalize our interests into a new pages folder?
-
 /*
   Need for login page:
     header -> TeamFinder
@@ -28,7 +21,6 @@ import axios from 'axios';
 */
 
 const Login = () => {
-  // We want multiple hooks here
   // This hook will change state if the user's input is invalid
   const [valid, setValid] = useState(true);
   // This hook will change our password's type to password
@@ -50,9 +42,12 @@ const Login = () => {
       [inputId]: e.target.value,
     }));
   };
+  // Clear localStorage in login
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
   // create a handle submit function
   const handleSubmit = (event) => {
-    return navigate('/home');
     // prevent a page referesh
     event.preventDefault();
     // do a check on the input types
@@ -63,52 +58,45 @@ const Login = () => {
         await axios
           .post('http://localhost:3000/auth/login', inputData)
           .then((response) => {
+            setValid(false);
             setInputData(initialInputState);
-            console.log(response.data);
+            return response.data;
           })
           .then((data) => {
-            // pass the specific user's username and user_id to the /home page
-            return navigate('/home', {
-              state: { username: data.username, user_id: data.user_id },
-            });
+            localStorage.setItem('username', data.username);
+            return navigate('/home');
           });
       } catch (err) {
-        console.log('Broke in logging in');
+        alert('Incorrect username or password!');
       }
     })();
   };
   return (
-    <div className="auth-page">
+    <div className='auth-page'>
       {/* The button has a type submit, which will trigger the onSubmit functionality */}
-      <form
-        className="form"
-        onSubmit={handleSubmit}
-      >
+      <form className='form' onSubmit={handleSubmit}>
         <input
-          className="username"
-          type="text"
-          placeholder="UserName"
+          className='username'
+          type='text'
+          placeholder='UserName'
           value={inputData.username}
           onChange={(e) => handleInputChange(e, 'username')}
         ></input>
         <input
-          className="password"
+          className='password'
           type={hidePW ? 'password' : 'text'}
-          placeholder="Password"
+          placeholder='Password'
           value={inputData.password}
           onChange={(e) => handleInputChange(e, 'password')}
         ></input>
-        <button
-          className="login-button"
-          type="submit"
-        >
+        <button className='login-button' type='submit'>
           Log In
         </button>
         <br></br>
         <button type="button" onClick={() => navigate('/signup')}>Sign Up</button>
         {/* Conditionally render an error message if the user input is invalid */}
         {!valid && (
-          <span id="goal-error">
+          <span id='goal-error'>
             Please type in a valid username and password
           </span>
         )}

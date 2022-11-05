@@ -6,7 +6,7 @@ const path = require('path');
 const cors = require('cors');
 const apiRouter = require('./routes/api');
 const authRouter = require('./routes/auth');
-
+const projRouter = require('./routes/projects')
 const PORT = 3000;
 
 app.use(cors({ origin: true }));
@@ -24,14 +24,13 @@ app.use('/api', apiRouter);
 // All our front end requests to login should be handled in our loginRouter
 app.use('/auth', authRouter);
 
-// ! Basic backend check
-app.get('/express', (req, res) => {
-  return res.status(200).json({ express: 'express is connected' });
-});
+app.use('/projects', projRouter);
+
+app.use(express.static(path.join(__dirname, '../build')));
 
 // 404 handlers
 app.use('/*', (req, res) => {
-  return res.sendFile(path.resolve(__dirname, '../client/index.html'));
+  return res.sendFile(path.resolve(__dirname, '../build/index.html'));
 });
 
 // Global error handler
