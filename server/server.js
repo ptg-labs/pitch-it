@@ -5,7 +5,7 @@ const path = require('path');
 // ! ran into cors issues :(
 const cors = require('cors');
 const apiRouter = require('./routes/api');
-const authRouter = require('./routes/auth');
+const userRouter = require('./routes/user');
 const projRouter = require('./routes/projects')
 const PORT = 3000;
 
@@ -22,7 +22,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', apiRouter);
 
 // All our front end requests to login should be handled in our loginRouter
-app.use('/auth', authRouter);
+app.use('/user', userRouter);
+
+app.use('/projects', projRouter);
 
 app.use(express.static(path.join(__dirname, '../build')));
 
