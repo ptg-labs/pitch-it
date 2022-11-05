@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Links } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Links,
+  useNavigate,
+} from 'react-router-dom';
 // import MainContainer from './containers/MainContainer';
 import axios from 'axios';
 
@@ -30,6 +36,8 @@ const Login = () => {
     username: '',
     password: '',
   };
+  // we want to useNavigate as a side effect of successful login
+  const navigate = useNavigate();
   const hidePW = () => setHide((prevState) => !prevState);
   // This hook will change state depending on the user's inputs
   const [inputData, setInputData] = useState(initialInputState);
@@ -54,7 +62,7 @@ const Login = () => {
           .then((response) => {
             setInputData(initialInputState);
             console.log(response.data);
-            //! navigate to home page here
+            return navigate('/home');
           });
       } catch (err) {
         console.log('Broke in logging in');
