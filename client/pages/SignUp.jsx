@@ -1,33 +1,7 @@
-import React, { Component } from 'react';
-import { useEffect, useState } from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Links,
-  useNavigate,
-} from 'react-router-dom';
-// import MainContainer from './containers/MainContainer';
+import React from 'react';
+import { useEffect, useState, useNavigate } from 'react';
 import axios from 'axios';
-// import SignUp from './SignUp.jsx';
-
-// ! Do we want Login to be its own page?
-// ! What if a user doesn't have an account yet?
-// ! Do we want to just use a modal to have them sign up, or redirect them to a new page?
-// ! How do we pass on user information to the home page
-
-// TODO What if instead of having distinct pages be components, we compartmentalize our interests into a new pages folder?
-
-/*
-  Need for login page:
-    header -> TeamFinder
-    Username -> submit form
-    Password -> submit form
-    Submit Button
-    Link -> Sign-up
-*/
-
-const Login = () => {
+const SignUp = () => {
   // We want multiple hooks here
   // This hook will change state if the user's input is invalid
   const [valid, setValid] = useState(true);
@@ -58,10 +32,10 @@ const Login = () => {
     // do a check on the input types
     if (!inputData.username || !inputData.password) return setValid(false);
     // Send an asynchronous post request to our server, which should handle logging in
-    (async function loginUser() {
+    (async function signupUser() {
       try {
         await axios
-          .post('http://localhost:3000/auth/login', inputData)
+          .post('http://localhost:3000/auth/singup', inputData)
           .then((response) => {
             setInputData(initialInputState);
             console.log(response.data);
@@ -101,21 +75,9 @@ const Login = () => {
         <button
           className="login-button"
           type="submit"
-        >
-          Log In
-        </button>
-        <br></br>
-        <button type="button" onClick={() => navigate('/signup')}>Sign Up</button>
-        {/* Conditionally render an error message if the user input is invalid */}
-        {!valid && (
-          <span id="goal-error">
-            Please type in a valid username and password
-          </span>
-        )}
+        >Submit</button>
       </form>
-      
     </div>
   );
 };
-
-export default Login;
+export default SignUp;
