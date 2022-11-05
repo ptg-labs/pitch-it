@@ -1,5 +1,6 @@
 import React from 'react';
-import { useEffect, useState, useNavigate } from 'react';
+import { useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const SignUp = () => {
   // We want multiple hooks here
@@ -24,18 +25,20 @@ const SignUp = () => {
       [inputId]: e.target.value,
     }));
   };
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
   // create a handle submit function
   const handleSubmit = (event) => {
-    return navigate('/home');
     // prevent a page referesh
     event.preventDefault();
     // do a check on the input types
     if (!inputData.username || !inputData.password) return setValid(false);
     // Send an asynchronous post request to our server, which should handle logging in
-    (async function signupUser() {
+    (async function loginUser() {
       try {
         await axios
-          .post('http://localhost:3000/auth/singup', inputData)
+          .post('http://localhost:3000/auth/signup', inputData)
           .then((response) => {
             setInputData(initialInputState);
             console.log(response.data);

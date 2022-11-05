@@ -93,7 +93,6 @@ const Login = () => {
           Log In
         </button>
         <br></br>
-        <button type="button" onClick={() => navigate('/signup')}>Sign Up</button>
         {/* Conditionally render an error message if the user input is invalid */}
         {!valid && (
           <span id='goal-error'>
@@ -101,7 +100,7 @@ const Login = () => {
           </span>
         )}
       </form>
-      
+      <button type="button" onClick={() => navigate('/signup')}>Sign Up</button>
     </div>
   );
 };
