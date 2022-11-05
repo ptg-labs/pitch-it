@@ -5,12 +5,14 @@ import React from 'react';
 */
 
 const Project = () => {
-  return (<div>
-    <div>Project Name:</div>
-    <div>Description</div>
-    <div>Skills needed</div>
-    <div>{Date()}</div>
-  </div>);
+  return (
+    <div>
+      <div>Project Titles:</div>
+      <div>Description</div>
+      <div>Skills needed</div>
+      <div>{Date()}</div>
+    </div>
+  );
 };
 
 export default Project;

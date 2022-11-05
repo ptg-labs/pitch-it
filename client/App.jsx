@@ -17,32 +17,14 @@ const App = () => {
     <BrowserRouter>
       {/* <Sidebar /> */}
       <Routes>
-        <Route
-          path="/"
-          element={<Login />}
-        ></Route>
+        <Route path='/' element={<Login />}></Route>
         <Route element={<SidebarLayout />}>
-          <Route
-            path="/home"
-            element={<Home />}
-          ></Route>
-          <Route
-            path="/MyProjects"
-            element={<MyProjects />}
-          ></Route>
-          <Route
-            path="/Favorites"
-            element={<Favorites />}
-          ></Route>
-          <Route
-            path="/create"
-            element={<Create />}
-          ></Route>
+          <Route path='/home' element={<Home />}></Route>
+          <Route path='/MyProjects' element={<MyProjects />}></Route>
+          <Route path='/Favorites' element={<Favorites />}></Route>
+          <Route path='/create' element={<Create />}></Route>
         </Route>
-        <Route
-          path="*"
-          element={<Error />}
-        ></Route>
+        <Route path='*' element={<Error />}></Route>
       </Routes>
     </BrowserRouter>
   );
