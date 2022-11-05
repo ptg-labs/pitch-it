@@ -1,4 +1,5 @@
 import React from 'react';
+import Project from '../components/Project.jsx';
 
 // ! do we want the Home component to be a component? Or do we want it to be its own page?
 /* 
@@ -10,7 +11,15 @@ import React from 'react';
 */
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <div>Home</div>
+      <div>
+        <button id="username">Hao</button>
+      </div>
+      <div><Project/></div>
+    </div>
+  );
 };
 
 export default Home;

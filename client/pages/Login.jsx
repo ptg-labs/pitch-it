@@ -9,6 +9,9 @@ import {
 } from 'react-router-dom';
 // import MainContainer from './containers/MainContainer';
 import axios from 'axios';
+import SignupModal from '../components/SignupModal.jsx';
+import SignUpStyles from '../components/SignUp/signup.scss';
+import Modal from 'react-modal';
 
 // ! Do we want Login to be its own page?
 // ! What if a user doesn't have an account yet?
@@ -30,6 +33,8 @@ const Login = () => {
   // We want multiple hooks here
   // This hook will change state if the user's input is invalid
   const [valid, setValid] = useState(true);
+  // This hook will open and close our modal
+  // const [modalOpen, setModalOpen] = useState(false);
   // This hook will change our password's type to password
   const [hide, setHide] = useState(true);
   // Create a hook that handles input changes for either username or password
@@ -51,6 +56,7 @@ const Login = () => {
   };
   // create a handle submit function
   const handleSubmit = (event) => {
+    return navigate('/home');
     // prevent a page referesh
     event.preventDefault();
     // do a check on the input types
@@ -76,34 +82,41 @@ const Login = () => {
     })();
   };
   return (
-    <div className='auth-page'>
+    <div className="auth-page">
       {/* The button has a type submit, which will trigger the onSubmit functionality */}
-      <form className='form' onSubmit={handleSubmit}>
+      <form
+        className="form"
+        onSubmit={handleSubmit}
+      >
         <input
-          className='username'
-          type='text'
-          placeholder='UserName'
+          className="username"
+          type="text"
+          placeholder="UserName"
           value={inputData.username}
           onChange={(e) => handleInputChange(e, 'username')}
         ></input>
         <input
-          className='password'
+          className="password"
           type={hidePW ? 'password' : 'text'}
-          placeholder='Password'
+          placeholder="Password"
           value={inputData.password}
           onChange={(e) => handleInputChange(e, 'password')}
         ></input>
-        <button className='login-button' type='submit'>
+        <button
+          className="login-button"
+          type="submit"
+        >
           Log In
         </button>
         <br></br>
         {/* Conditionally render an error message if the user input is invalid */}
         {!valid && (
-          <span id='goal-error'>
+          <span id="goal-error">
             Please type in a valid username and password
           </span>
         )}
       </form>
+      <SignupModal />
     </div>
   );
 };

@@ -4,10 +4,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './client/index.js',
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
   },
   devServer: {
+    historyApiFallback: true,
     static: {
       publicPath: '/build',
       directory: path.resolve(__dirname, '/build'),
