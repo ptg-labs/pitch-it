@@ -17,15 +17,17 @@ const Home = () => {
   const getProjects = async () => {
     try {
       await axios
-        .get('http://localhost:3000/api/projects')
+        .get('http://localhost:3000/projects/all')
         .then((response) => response.data)
         .then((data) => {
+          console.log(data);
           return data.map((obj) => {
             return (
               <Project
-                key={obj._id.toString()}
-                id={obj._id.toString()}
-                title={obj.title}
+                key={obj.id.toString()}
+                project_id={obj.id.toString()}
+                owner_name={obj.owner_name}
+                title={obj.project_name}
                 description={obj.description}
                 skills={obj.skills}
                 date={obj.date}
