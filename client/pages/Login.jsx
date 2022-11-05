@@ -58,7 +58,7 @@ const Login = () => {
     (async function loginUser() {
       try {
         await axios
-          .post('http://localhost:3000/auth/login', inputData)
+          .post('http://localhost:3000/user/login', inputData)
           .then((response) => {
             setValid(false);
             setInputData(initialInputState);
