@@ -15,7 +15,7 @@ authController.verifyUser = (req, res, next) => {
     return res.status(200).json(false);
   } catch (err) {
     return next({
-      log: 'Error in authController.createGol',
+      log: 'Error in authController.verifyUser',
       status: 400,
       message: { err: err },
     });
