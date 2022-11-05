@@ -1,12 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { useEffect, useState } from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Links,
-  useNavigate,
-} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import MainContainer from './containers/MainContainer';
 import axios from 'axios';
 const SignUp = () => {
@@ -45,16 +39,14 @@ const SignUp = () => {
     (async function loginUser() {
       try {
         await axios
-          .post('http://localhost:3000/auth/signup', inputData)
+          .post('http://localhost:3000/user/signup', inputData)
           .then((response) => {
             setInputData(initialInputState);
             console.log(response.data);
           })
           .then((data) => {
             // pass the specific user's username and user_id to the /home page
-            return navigate('/home', {
-              state: { username: data.username, user_id: data.user_id },
-            });
+            return navigate('/');
           });
       } catch (err) {
         console.log('Broke in logging in');
@@ -62,35 +54,35 @@ const SignUp = () => {
     })();
   };
   return (
-    <div className="auth-page">
+    <div className='auth-page'>
       {/* The button has a type submit, which will trigger the onSubmit functionality */}
-      <form
-        className="form"
-        onSubmit={handleSubmit}
-      >
+      <form className='form' onSubmit={handleSubmit}>
         <input
-          className="username"
-          type="text"
-          placeholder="UserName"
+          className='username'
+          type='text'
+          placeholder='UserName'
           value={inputData.username}
           onChange={(e) => handleInputChange(e, 'username')}
         ></input>
         <input
-          className="password"
+          className='password'
           type={hidePW ? 'password' : 'text'}
-          placeholder="Password"
+          placeholder='Password'
           value={inputData.password}
           onChange={(e) => handleInputChange(e, 'password')}
         ></input>
-        <button
-          className="login-button"
-          type="submit"
-        >Submit</button>
+        <button className='login-button' type='submit'>
+          Submit
+        </button>
+        <br></br>
+        {!valid && (
+          <span id='goal-error'>
+            Please type in a valid username and password
+          </span>
+        )}
       </form>
     </div>
   );
-
 };
 
 export default SignUp;
-

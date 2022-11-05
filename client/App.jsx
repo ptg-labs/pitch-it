@@ -9,6 +9,7 @@ import Create from './pages/Create.jsx';
 import Favorites from './pages/Favorites.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import SidebarLayout from './components/SidebarLayout.jsx';
+import SignUp from './pages/SignUp.jsx';
 // Do we need to hang MainContainer from App or from Login?
 
 // ONLY USE ROUTES
@@ -18,6 +19,7 @@ const App = () => {
       {/* <Sidebar /> */}
       <Routes>
         <Route path='/' element={<Login />}></Route>
+        <Route path='/signup' element={<SignUp />}></Route>
         <Route element={<SidebarLayout />}>
           <Route path='/home' element={<Home />}></Route>
           <Route path='/MyProjects' element={<MyProjects />}></Route>

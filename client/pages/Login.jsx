@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { useEffect, useState } from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Links,
-  useNavigate,
-} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import MainContainer from './containers/MainContainer';
 import axios from 'axios';
 // import SignUp from './SignUp.jsx';
-
-
 
 /*
   Need for login page:
@@ -104,7 +96,9 @@ const Login = () => {
           </span>
         )}
       </form>
-      <button type="button" onClick={() => navigate('/signup')}>Sign Up</button>
+      <button type='button' onClick={() => navigate('/signup')}>
+        Sign Up
+      </button>
     </div>
   );
 };

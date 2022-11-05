@@ -4,9 +4,8 @@ const path = require('path');
 // ! Uncomment lines 5 and 10 if we run into CORS issues
 // ! ran into cors issues :(
 const cors = require('cors');
-const apiRouter = require('./routes/api');
 const userRouter = require('./routes/user');
-const projRouter = require('./routes/projects')
+const projRouter = require('./routes/projects');
 const PORT = 3000;
 
 app.use(cors({ origin: true }));
@@ -17,9 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 // app.get('/', (req, res) => {
 //   return res.sendFile(path.resolve(__dirname, '../client/index.html'));
 // });
-
-// All our front end requests should be handled in our apiRouter
-app.use('/api', apiRouter);
 
 // All our front end requests to login should be handled in our loginRouter
 app.use('/user', userRouter);
