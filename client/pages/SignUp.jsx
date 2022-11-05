@@ -9,20 +9,8 @@ import {
 } from 'react-router-dom';
 // import MainContainer from './containers/MainContainer';
 import axios from 'axios';
-// import SignUp from './SignUp.jsx';
-
-
-
-/*
-  Need for login page:
-    header -> TeamFinder
-    Username -> submit form
-    Password -> submit form
-    Submit Button
-    Link -> Sign-up
-*/
-
-const Login = () => {
+const SignUp = () => {
+  // We want multiple hooks here
   // This hook will change state if the user's input is invalid
   const [valid, setValid] = useState(true);
   // This hook will change our password's type to password
@@ -44,7 +32,6 @@ const Login = () => {
       [inputId]: e.target.value,
     }));
   };
-  // Clear localStorage in login
   useEffect(() => {
     localStorage.clear();
   }, []);
@@ -58,55 +45,52 @@ const Login = () => {
     (async function loginUser() {
       try {
         await axios
-          .post('http://localhost:3000/user/login', inputData)
+          .post('http://localhost:3000/auth/signup', inputData)
           .then((response) => {
-            setValid(false);
             setInputData(initialInputState);
-            return response.data;
+            console.log(response.data);
           })
           .then((data) => {
-            console.log(data);
-            localStorage.setItem('username', data.username);
-            localStorage.setItem('user_id', data.user_id);
-            return navigate('/home');
+            // pass the specific user's username and user_id to the /home page
+            return navigate('/home', {
+              state: { username: data.username, user_id: data.user_id },
+            });
           });
       } catch (err) {
-        alert('Incorrect username or password!');
+        console.log('Broke in logging in');
       }
     })();
   };
   return (
-    <div className='auth-page'>
+    <div className="auth-page">
       {/* The button has a type submit, which will trigger the onSubmit functionality */}
-      <form className='form' onSubmit={handleSubmit}>
+      <form
+        className="form"
+        onSubmit={handleSubmit}
+      >
         <input
-          className='username'
-          type='text'
-          placeholder='UserName'
+          className="username"
+          type="text"
+          placeholder="UserName"
           value={inputData.username}
           onChange={(e) => handleInputChange(e, 'username')}
         ></input>
         <input
-          className='password'
+          className="password"
           type={hidePW ? 'password' : 'text'}
-          placeholder='Password'
+          placeholder="Password"
           value={inputData.password}
           onChange={(e) => handleInputChange(e, 'password')}
         ></input>
-        <button className='login-button' type='submit'>
-          Log In
-        </button>
-        <br></br>
-        {/* Conditionally render an error message if the user input is invalid */}
-        {!valid && (
-          <span id='goal-error'>
-            Please type in a valid username and password
-          </span>
-        )}
+        <button
+          className="login-button"
+          type="submit"
+        >Submit</button>
       </form>
-      <button type="button" onClick={() => navigate('/signup')}>Sign Up</button>
     </div>
   );
+
 };
 
-export default Login;
+export default SignUp;
+
