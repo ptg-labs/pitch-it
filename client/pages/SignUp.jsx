@@ -1,6 +1,13 @@
-import React from 'react';
-import { useEffect, useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { Component } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Links,
+  useNavigate,
+} from 'react-router-dom';
+// import MainContainer from './containers/MainContainer';
 import axios from 'axios';
 const SignUp = () => {
   // We want multiple hooks here
@@ -82,5 +89,8 @@ const SignUp = () => {
       </form>
     </div>
   );
+
 };
+
 export default SignUp;
+
