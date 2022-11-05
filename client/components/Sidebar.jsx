@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { useState } from 'react';
+
 // import sidebar paths and icons -> for now we just make a file with an array of objects
 // import {sideBarMenu, socialIcons} from "../../data/data";
 // import './sidebar.scss';

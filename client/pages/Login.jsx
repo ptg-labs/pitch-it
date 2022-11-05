@@ -56,14 +56,16 @@ const Login = () => {
     (async function loginUser() {
       try {
         await axios
-          .post('http://localhost:3000/auth/login', inputData)
+          .post('http://localhost:3000/user/login', inputData)
           .then((response) => {
             setValid(false);
             setInputData(initialInputState);
             return response.data;
           })
           .then((data) => {
+            console.log(data);
             localStorage.setItem('username', data.username);
+            localStorage.setItem('user_id', data.user_id);
             return navigate('/home');
           });
       } catch (err) {
