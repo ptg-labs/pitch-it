@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const path = require('path');
 // ! Uncomment lines 5 and 10 if we run into CORS issues
-// const cors = require('cors');
+// ! ran into cors issues :(
+const cors = require('cors');
 const apiRouter = require('./routes/api');
 const authRouter = require('./routes/auth');
 
 const PORT = 3000;
 
-//app.use(cors({origin: true}))
+app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Routes, Route, Links } from 'react-router-dom';
 import MainContainer from './containers/MainContainer.jsx';
+import Login from './pages/Login.jsx';
 
 // Do we need to hang MainContainer from App or from Login?
 
@@ -8,7 +9,6 @@ import MainContainer from './containers/MainContainer.jsx';
 const App = () => {
   return (
     <BrowserRouter>
-      <p>This is sample text</p>
       <Routes>
         <Route path='/' element={<Login />}></Route>
       </Routes>
