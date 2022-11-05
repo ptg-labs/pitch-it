@@ -4,6 +4,7 @@ const path = require('path');
 // ! Uncomment lines 5 and 10 if we run into CORS issues
 // const cors = require('cors');
 const apiRouter = require('./routes/api');
+const authRouter = require('./routes/auth');
 
 const PORT = 3000;
 
@@ -18,6 +19,9 @@ app.get('/', (req, res) => {
 
 // All our front end requests should be handled in our apiRouter
 app.use('/api', apiRouter);
+
+// All our front end requests to login should be handled in our loginRouter
+app.use('/auth', authRouter);
 
 // ! Basic backend check
 app.get('/express', (req, res) => {

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-
+// ! do we want the Home component to be a component? Or do we want it to be its own page?
 /* 
   What do we need from Home component?
   Header component
@@ -10,9 +10,7 @@ import React from 'react'
 */
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+  return <div>Home</div>;
+};
 
-export default Home
+export default Home;
