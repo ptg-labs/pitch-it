@@ -6,7 +6,7 @@ const path = require('path');
 const cors = require('cors');
 const apiRouter = require('./routes/api');
 const authRouter = require('./routes/auth');
-
+const projRouter = require('./routes/projects')
 const PORT = 3000;
 
 app.use(cors({ origin: true }));
