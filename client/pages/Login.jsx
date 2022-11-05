@@ -13,6 +13,7 @@ import axios from 'axios';
 // ! Do we want Login to be its own page?
 // ! What if a user doesn't have an account yet?
 // ! Do we want to just use a modal to have them sign up, or redirect them to a new page?
+// ! How do we pass on user information to the home page
 
 // TODO What if instead of having distinct pages be components, we compartmentalize our interests into a new pages folder?
 
@@ -62,7 +63,12 @@ const Login = () => {
           .then((response) => {
             setInputData(initialInputState);
             console.log(response.data);
-            return navigate('/home');
+          })
+          .then((data) => {
+            // pass the specific user's username and user_id to the /home page
+            return navigate('/home', {
+              state: { username: data.username, user_id: data.user_id },
+            });
           });
       } catch (err) {
         console.log('Broke in logging in');
