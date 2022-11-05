@@ -9,7 +9,7 @@ router.get('/', projectController.getMyProject)
 
 router.get('/all', projectController.getAllProjects);
 
-//router.delete('/', projectController.deleteProject);
+router.delete('/', projectController.deleteProject);
 
 
 
