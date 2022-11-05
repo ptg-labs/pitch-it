@@ -65,7 +65,9 @@ const Login = () => {
             return response.data;
           })
           .then((data) => {
+            console.log(data);
             localStorage.setItem('username', data.username);
+            localStorage.setItem('user_id', data.user_id);
             return navigate('/home');
           });
       } catch (err) {
