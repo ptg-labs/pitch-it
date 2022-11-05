@@ -14,9 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serving index.html to the root
-app.get('/', (req, res) => {
-  return res.sendFile(path.resolve(__dirname, '../client/index.html'));
-});
+// app.get('/', (req, res) => {
+//   return res.sendFile(path.resolve(__dirname, '../client/index.html'));
+// });
 
 // All our front end requests should be handled in our apiRouter
 app.use('/api', apiRouter);
@@ -30,8 +30,8 @@ app.get('/express', (req, res) => {
 });
 
 // 404 handlers
-app.use('*', (req, res) => {
-  res.status(404).json('Not Found, default 404 handler in server.js');
+app.use('/*', (req, res) => {
+  return res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
 // Global error handler
