@@ -24,6 +24,8 @@ app.use('/api', apiRouter);
 // All our front end requests to login should be handled in our loginRouter
 app.use('/auth', authRouter);
 
+app.use('/projects', projRouter);
+
 app.use(express.static(path.join(__dirname, '../build')));
 
 // 404 handlers
