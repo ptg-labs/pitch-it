@@ -6,7 +6,7 @@ const path = require('path');
 const cors = require('cors');
 const apiRouter = require('./routes/api');
 const authRouter = require('./routes/auth');
-
+const projRouter = require('./routes/projects')
 const PORT = 3000;
 
 app.use(cors({ origin: true }));
@@ -24,6 +24,8 @@ app.use('/api', apiRouter);
 // All our front end requests to login should be handled in our loginRouter
 app.use('/auth', authRouter);
 
+// all our front end requests to projects should be handled in our projRouter
+app.use('/projects', projRouter);
 // ! Basic backend check
 app.get('/express', (req, res) => {
   return res.status(200).json({ express: 'express is connected' });

@@ -45,7 +45,7 @@ authController.createUser = (req, res, next) => {
       })
       .catch((err) => {
         return next({
-          log: 'Error in authController.verifyUser',
+          log: 'Error in authController.createUser',
           status: 400,
           message: { err: err },
         });
