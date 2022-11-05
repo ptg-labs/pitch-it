@@ -2,17 +2,17 @@ const db = require('../models/projectModels');
 
 const userController = {};
 
-userController.getAllUsers = (req, res, next) => {
-  try {
-    const queryStr = `SELECT * FROM users`;
-    db.query(queryStr).then((data) => {
-      console.log(data);
-      return res.status(200);
-    });
-  } catch (err) {
-    return next({});
-  }
-};
+// userController.getAllUsers = (req, res, next) => {
+//   try {
+//     const queryStr = `SELECT * FROM users`;
+//     db.query(queryStr).then((data) => {
+//       console.log(data);
+//       return res.status(200);
+//     });
+//   } catch (err) {
+//     return next({});
+//   }
+// };
 
 userController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;

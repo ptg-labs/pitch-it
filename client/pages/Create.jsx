@@ -39,7 +39,9 @@ const Create = () => {
           'http://localhost:3000/projects/',
           inputData
         );
-        if (postProjectStatus) return navigate('/myprojects');
+        if (postProjectStatus) {
+          return navigate('/myprojects');
+        }
       } catch (err) {
         alert('Invalid project details');
       }
