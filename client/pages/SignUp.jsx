@@ -76,8 +76,8 @@ const SignUp = () => {
         </button>
         <br></br>
         {!valid && (
-          <span id='goal-error'>
-            Please type in a valid username and password
+          <span className='input-error'>
+            Please enter a valid username and password
           </span>
         )}
       </form>
