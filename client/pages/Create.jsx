@@ -12,12 +12,14 @@ import { useNavigate } from 'react-router-dom';
 */
 
 const Create = () => {
-  const inputState = {
+  const defaultInput = {
     project_name: '',
     description: '',
     skillset: '',
   };
-  const [inputData, setInputData] = useState(inputState);
+  const [inputData, setInputData] = useState(defaultInput);
+  const [duplicate, setDuplicate] = useState(false);
+  const [valid, setValid] = useState(true);
   const navigate = useNavigate();
   const handleInputChange = (e, inputId) => {
     return setInputData((prevState) => ({
@@ -32,18 +34,28 @@ const Create = () => {
     inputData.date = date.toDateString();
     inputData.owner_id = localStorage.getItem('user_id');
     inputData.owner_name = localStorage.getItem('username');
+    if (
+      !inputData.project_name ||
+      !inputData.description ||
+      !inputData.skillset
+    )
+      return setValid(false);
     // Send an asynchronous post request to our server
     (async function postProject() {
       try {
-        const postProjectStatus = axios.post(
+        const postProjectStatus = await axios.post(
           'http://localhost:3000/projects/',
           inputData
         );
         if (postProjectStatus) {
+          setDuplicate(false);
+          setValid(true);
+          setInputData(defaultInput);
           return navigate('/myprojects');
         }
       } catch (err) {
-        alert('Invalid project details');
+        console.log('catch block');
+        setDuplicate(true);
       }
     })();
   };
@@ -51,6 +63,19 @@ const Create = () => {
     <div>
       <form id='project-creation-form' onSubmit={handleSubmit}>
         <h1>Project Creation!</h1>
+        {duplicate && (
+          <>
+            <span className='duplicate-error'>
+              A project with this name already exists.
+            </span>
+            <br></br>
+          </>
+        )}
+        {!valid && (
+          <span className='input-error'>
+            Please enter valid project information.
+          </span>
+        )}
         <div className='field'>
           <label>Project Title:</label>
           <input

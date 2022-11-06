@@ -78,7 +78,6 @@ projectController.getProject = (req, res, next) => {
 };
 
 projectController.addProject = (req, res, next) => {
-  console.log(req.body);
   const { owner_id, project_name, date, description, owner_name } = req.body;
   const queryStr = `INSERT INTO projects(owner_id, project_name, date, description, owner_name) VALUES ('${owner_id}','${project_name}','${date}','${description}','${owner_name}')`;
   db.query(queryStr)
@@ -95,7 +94,7 @@ projectController.addProject = (req, res, next) => {
 };
 
 projectController.deleteProject = (req, res, next) => {
-  const { project_id } = req.body;
+  const project_id = req.params.id;
   const queryStr = `DELETE FROM projects WHERE projects.id = '${project_id}'`;
   db.query(queryStr)
     .then(() => {

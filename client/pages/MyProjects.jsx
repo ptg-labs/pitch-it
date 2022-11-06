@@ -15,8 +15,7 @@ import Project from '../components/Project.jsx';
 const MyProjects = () => {
   // this is used to populate my projects
   const [myProjects, setMyProjects] = useState([]);
-  // This is a function used to delete projects
-  const handleDelete = () => {};
+  const [ranOnce, setRanOnce] = useState(false);
   // Send a get request to the server on page load to pull in all my projects
   const getMyProjects = async () => {
     console.log('getRequest');
@@ -46,10 +45,24 @@ const MyProjects = () => {
       alert("Couldn't fetch my projects");
     }
   };
+  // This is a function used to delete projects
+  const handleDelete = async (project_id) => {
+    // setRanOnce here so that useEffect fires
+    setRanOnce(false);
+    const deleteProject = await axios.delete(
+      `http://localhost:3000/projects/${project_id}`
+    );
+    setMyProjects((prevState) => {
+      console.log(prevState);
+      return prevState.filter((obj) => obj.project_id !== project_id);
+    });
+  };
   useEffect(() => {
-    console.log('use-effect triggered');
-    getMyProjects();
-  }, []);
+    if (!ranOnce) {
+      getMyProjects();
+      setRanOnce(true);
+    }
+  }, [myProjects]);
   // if (myProjects.length === myProjects.length) return null;
   return (
     <div>

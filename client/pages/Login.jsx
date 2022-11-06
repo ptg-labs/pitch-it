@@ -91,8 +91,8 @@ const Login = () => {
         <br></br>
         {/* Conditionally render an error message if the user input is invalid */}
         {!valid && (
-          <span id='goal-error'>
-            Please type in a valid username and password
+          <span className='input-error'>
+            Please enter a valid username and password
           </span>
         )}
       </form>
