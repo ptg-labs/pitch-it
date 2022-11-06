@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Project from '../components/Project.jsx';
+import Checkbox from '../components/Checkbox.jsx';
 import axios from 'axios';
-// ! do we want the Home component to be a component? Or do we want it to be its own page?
 /* 
   What do we need from Home component?
   Header component
@@ -11,8 +11,54 @@ import axios from 'axios';
 */
 
 const Home = () => {
+  // this object contains all the skills and initializes their clickState to false
+  const skillsObj = {
+    React: false,
+    Express: false,
+    SQL: false,
+    Node: false,
+    MongoDB: false,
+    Javascript: false,
+    HTML: false,
+    CSS: false,
+    Python: false,
+    'C++': false,
+    Java: false,
+    PostgreSQL: false,
+    Git: false,
+    Vue: false,
+    Angular: false,
+    'C#': false,
+    Docker: false,
+    Kubernetes: false,
+    Unity: false,
+    'Unreal Engine': false,
+    'Spring Boot': false,
+  };
   // this is to pass user information to the home page
   const [projectArr, setProjectArr] = useState([]);
+  // this hook will conditionally render the potential filters
+  const [filterPress, setFilterPress] = useState(false);
+  // this state hook will say which filters are active
+  const [skillState, setSkillState] = useState(skillsObj);
+  const handleClick = (skill) => {
+    return setSkillState((prevState) => ({
+      ...prevState,
+      [skill]: !prevState[skill],
+    }));
+  };
+  const checkboxArr = [];
+  for (const skill in skillState) {
+    skillState[skill];
+    checkboxArr.push(
+      <Checkbox
+        key={skill}
+        skill={skill}
+        handleClick={handleClick}
+        clicked={skillState[skill]}
+      />
+    );
+  }
   // Send a get request to the server on page load to pull in all projects in our DB
   const getProjects = async () => {
     try {
@@ -20,7 +66,6 @@ const Home = () => {
         .get('http://localhost:3000/projects/all')
         .then((response) => response.data)
         .then((data) => {
-          console.log(data);
           return data.map((obj) => {
             return (
               <Project
@@ -40,6 +85,7 @@ const Home = () => {
       alert("couldn't find project");
     }
   };
+  // On page load, run the asynchronous get request
   useEffect(() => {
     getProjects();
     // populate user
@@ -50,6 +96,8 @@ const Home = () => {
       <div>
         <span id='username'> Hello, {localStorage.getItem('username')} </span>
       </div>
+      <button onClick={() => setFilterPress(!filterPress)}>Filter</button>
+      {filterPress && <div className='filters'>{checkboxArr}</div>}
       <div>{projectArr}</div>
     </div>
   );
