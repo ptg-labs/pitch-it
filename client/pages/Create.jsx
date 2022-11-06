@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Checkbox from '../components/Checkbox.jsx';
 
 /*
   Create button needs:
@@ -12,10 +13,54 @@ import { useNavigate } from 'react-router-dom';
 */
 
 const Create = () => {
+  // this object contains all the skills and initializes their clickState to false
+  const skillsObj = {
+    React: false,
+    Express: false,
+    SQL: false,
+    Node: false,
+    MongoDB: false,
+    Javascript: false,
+    HTML: false,
+    CSS: false,
+    Python: false,
+    'C++': false,
+    Java: false,
+    PostgreSQL: false,
+    Git: false,
+    Vue: false,
+    Angular: false,
+    'C#': false,
+    Docker: false,
+    Kubernetes: false,
+    Unity: false,
+    'Unreal Engine': false,
+    'Spring Boot': false,
+  };
+  // this state hook will say which filters are active
+  const [skillState, setSkillState] = useState(skillsObj);
+  const handleClick = (skill) => {
+    return setSkillState((prevState) => ({
+      ...prevState,
+      [skill]: !prevState[skill],
+    }));
+  };
+  const checkboxArr = [];
+  for (const skill in skillState) {
+    skillState[skill];
+    checkboxArr.push(
+      <Checkbox
+        type='button'
+        key={skill}
+        skill={skill}
+        handleClick={handleClick}
+        clicked={skillState[skill]}
+      />
+    );
+  }
   const defaultInput = {
     project_name: '',
     description: '',
-    skillset: '',
   };
   const [inputData, setInputData] = useState(defaultInput);
   const [duplicate, setDuplicate] = useState(false);
@@ -30,14 +75,23 @@ const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Populate inputData with required fields
+    const filteredSkills = [];
+    // We are going to push the index of the truthy skills into an array, which we will send in a request to our backend
+    for (const skill in skillState) {
+      // If we read a truthy value in our skillState object
+      if (skillState[skill])
+        // push the index to the filteredSkills array
+        filteredSkills.push(Object.keys(skillsObj).indexOf(skill) + 1);
+    }
     const date = new Date();
     inputData.date = date.toDateString();
     inputData.owner_id = localStorage.getItem('user_id');
     inputData.owner_name = localStorage.getItem('username');
+    inputData.skills = filteredSkills;
     if (
       !inputData.project_name ||
       !inputData.description ||
-      !inputData.skillset
+      !inputData.skills.length
     )
       return setValid(false);
     // Send an asynchronous post request to our server
@@ -99,15 +153,16 @@ const Create = () => {
           />
         </div>
         <div className='field'>
-          <label>Skillsets Needed:</label>
-          <input
+          <label>Needed Skills:</label>
+          {/* <input
             type='text'
             id='skillsets-needed'
             name='skillsets-needed'
             value={inputData.skillset}
             placeholder='Enter a description of the Teammates you would like to find!'
             onChange={(e) => handleInputChange(e, 'skillset')}
-          />
+          /> */}
+          <div className='filters'>{checkboxArr}</div>
         </div>
         <button type='submit'>Create Project</button>
       </form>

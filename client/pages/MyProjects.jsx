@@ -18,12 +18,10 @@ const MyProjects = () => {
   const [ranOnce, setRanOnce] = useState(false);
   // Send a get request to the server on page load to pull in all my projects
   const getMyProjects = async () => {
-    console.log('getRequest');
     try {
       const myProjects = await axios.get(
         `http://localhost:3000/projects/${localStorage.getItem('user_id')}`
       );
-      console.log(myProjects.data);
       setMyProjects(
         myProjects.data.map((obj) => {
           return (
