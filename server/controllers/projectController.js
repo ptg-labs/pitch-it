@@ -78,11 +78,35 @@ projectController.getProject = (req, res, next) => {
 };
 
 projectController.addProject = (req, res, next) => {
-  const { owner_id, project_name, date, description, owner_name } = req.body;
-  const queryStr = `INSERT INTO projects(owner_id, project_name, date, description, owner_name) VALUES ('${owner_id}','${project_name}','${date}','${description}','${owner_name}')`;
+  const { owner_id, project_name, date, description, owner_name, skills } =
+    req.body;
+  console.log(req.body.skills);
+  const queryStr = `INSERT INTO projects(owner_id, project_name, date, description, owner_name) VALUES ('${owner_id}','${project_name}','${date}','${description}','${owner_name}') RETURNING id`;
   db.query(queryStr)
-    .then(() => {
-      return res.status(200).json(true);
+    .then((data) => {
+      // By using RETURNING id in conjunction with the insert into, we can store the new project's primary key in insertedId
+      const insertedId = data.rows[0].id;
+      // We need to construct another query string to add to our join table
+      // ! We have a varying amount of rows to enter into our join table.....
+      const multipleStringArr = [];
+      // each value of skills is the primary key to the skill in the skills table
+      for (const value of skills) {
+        multipleStringArr.push(`('${insertedId}', '${value}')`);
+      }
+      // create a single string
+      const multipleString = multipleStringArr.join(',').replaceAll('`', '');
+      const queryStr2 = `INSERT INTO projects_skills_join_table (project_id, skill_id) VALUES${multipleString}`;
+      db.query(queryStr2)
+        .then(() => {
+          return res.status(200).json(true);
+        })
+        .catch((err) => {
+          return next({
+            log: 'Error in projectController.addProject join table',
+            status: 400,
+            message: { err: err },
+          });
+        });
     })
     .catch((err) => {
       return next({

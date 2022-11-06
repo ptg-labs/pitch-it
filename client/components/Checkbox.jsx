@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Checkbox = ({ skill, handleClick }) => {
+const Checkbox = ({ skill, handleClick, type }) => {
   const [toggle, setToggle] = useState(false);
   const handleToggle = () => {
     setToggle(!toggle);
@@ -8,6 +8,7 @@ const Checkbox = ({ skill, handleClick }) => {
   return (
     <div>
       <button
+        type={type}
         style={{ backgroundColor: toggle ? '#FFF' : 'lightblue' }}
         id={skill}
         name={skill}
