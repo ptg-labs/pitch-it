@@ -67,6 +67,7 @@ const Home = () => {
         .then((response) => response.data)
         .then((data) => {
           return data.map((obj) => {
+            console.log(obj);
             return (
               <Project
                 key={obj.id.toString()}

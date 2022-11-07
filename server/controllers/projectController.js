@@ -21,10 +21,34 @@ projectController.getAllProjects = (req, res, next) => {
     })
     .then((projects) => {
       // ! We are getting back an array of objects with repeats because each object has a unique skill field
-      console.log(projects);
+      // We already have a check that ensures that each project's title is unique on the frontend
+      const uniqueTitles = new Set();
+      // We have to add to previous values to ones that pass the Set, probably better to do this using reduce but i've already written a bunch of logic using filter
+      const mergedProjects = [];
+      // filter out any repeat project_name and instead just push the skill into an array
+      projects.filter((project) => {
+        // This if block triggers when there's a repeat
+        if (uniqueTitles.has(project.project_name)) {
+          // Find the project with the exact same project name and push in the unique skill
+          const toMerge = mergedProjects.find(
+            (obj) => obj.project_name === project.project_name
+          );
+          toMerge.skills.push(project.skill);
+          return false;
+        }
+        // If the project_name is unique, add its name to the set
+        uniqueTitles.add(project.project_name);
+        // add a skills property to the project object that is an array with the skill
+        project.skills = [project.skill];
+        // delete that skill
+        delete project.skill;
+        // push the altered object into the merged Projects array
+        mergedProjects.push(project);
+        return true;
+      });
       // If our query returns null, just send back false to our front end
       if (!projects) return res.status(400).json(false);
-      return res.status(200).json(projects);
+      return res.status(200).json(mergedProjects);
     })
     .catch((err) => {
       return next({
@@ -38,15 +62,41 @@ projectController.getAllProjects = (req, res, next) => {
 //get individual users projects
 projectController.getMyProject = (req, res, next) => {
   const user_id = req.params.id;
-  const queryStr = `SELECT * FROM projects WHERE projects.owner_id='${user_id}'`;
+  const queryStr = `SELECT pr.*, s.* FROM projects_skills_join_table jt JOIN projects pr ON jt.project_id = pr.id JOIN skills s ON jt.skill_id = s.id WHERE pr.owner_id='${user_id}'`;
   db.query(queryStr)
     .then((data) => {
       return data.rows;
     })
     .then((projects) => {
+      // ! We are getting back an array of objects with repeats because each object has a unique skill field
+      // We already have a check that ensures that each project's title is unique on the frontend
+      const uniqueTitles = new Set();
+      // We have to add to previous values to ones that pass the Set, probably better to do this using reduce but i've already written a bunch of logic using filter
+      const mergedProjects = [];
+      // filter out any repeat project_name and instead just push the skill into an array
+      projects.filter((project) => {
+        // This if block triggers when there's a repeat
+        if (uniqueTitles.has(project.project_name)) {
+          // Find the project with the exact same project name and push in the unique skill
+          const toMerge = mergedProjects.find(
+            (obj) => obj.project_name === project.project_name
+          );
+          toMerge.skills.push(project.skill);
+          return false;
+        }
+        // If the project_name is unique, add its name to the set
+        uniqueTitles.add(project.project_name);
+        // add a skills property to the project object that is an array with the skill
+        project.skills = [project.skill];
+        // delete that skill
+        delete project.skill;
+        // push the altered object into the merged Projects array
+        mergedProjects.push(project);
+        return true;
+      });
       // If our query returns null, just send back false to our front end
       if (!projects) return res.status(400).json(false);
-      return res.status(200).json(projects);
+      return res.status(200).json(mergedProjects);
     })
     .catch((err) => {
       return next({
