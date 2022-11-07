@@ -1,0 +1,90 @@
+// styles shit
+* {
+  background-color: whitesmoke;
+  font-family: 'Novo', sans-serif;
+}
+body {
+  background-color: whitesmoke;
+}
+$brand-primary: #b6b7cb;
+$brand-light-primary: #17d7fa;
+
+// .filters {
+//   display: flex;
+//   margin-block: 10px;
+//   div {
+//     margin-inline: 10px;
+//   }
+//   button {
+//     border-radius: 8px;
+//   }
+// }
+
+#homepage-div {
+  margin-left: 110px;
+}
+#Home {
+  font-size: 60px;
+  //   background: linear-gradient(
+  //     90deg,
+  //     rgba(31, 31, 217, 1) 0%,
+  //     rgba(38, 202, 209, 1) 82%,
+  //     rgba(241, 241, 247, 0.8127626050420168) 100%
+  //   );
+  color: rgb(43, 41, 41);
+  border-width: 2px;
+  border-radius: 15px;
+  padding-left: 10px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
+
+#pitched-projects {
+  font-family: 'Roboto', sans-serif;
+}
+.skill-button {
+  border-style: none;
+  padding: 4px 4px;
+  padding-inline: 8px;
+}
+.project-card-container {
+  //   margin-inline: auto;
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   align-items: center;
+  //   justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  justify-content: space-evenly;
+  justify-items: center;
+  align-content: space-evenly;
+  align-items: center;
+}
+
+.filter-button {
+  border-radius: 8px;
+  padding: 4px;
+  background: linear-gradient(to right, $brand-primary, $brand-light-primary);
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 300;
+  color: #fff;
+  display: block;
+  width: 100px;
+  height: 40px;
+  outline: none;
+  cursor: pointer;
+}
+.homepage-button-container {
+  margin-top: 10px;
+  margin-inline: 1.8%;
+}
+.filters {
+  display: grid;
+  justify-items: center;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: space-evenly;
+}

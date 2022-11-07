@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Project from '../components/Project.jsx';
 import Checkbox from '../components/Checkbox.jsx';
 import axios from 'axios';
+import '../styles/home.scss';
 /* 
   What do we need from Home component?
   Header component
@@ -119,14 +120,23 @@ const Home = () => {
     // populate user
   }, []);
   return (
-    <div>
-      <div>Home</div>
-      <div>
-        <span id="username"> Hello, {localStorage.getItem('username')} </span>
+    <div id="homepage-div">
+      <div id="Home">Pitches</div>
+      {/* <div id="Home">Welcome, {localStorage.getItem('username')}</div> */}
+      <hr />
+      <div className="homepage-button-container">
+        <button
+          className="filter-button"
+          onClick={() => setFilterPress(!filterPress)}
+        >
+          Filter
+        </button>
       </div>
-      <button onClick={() => setFilterPress(!filterPress)}>Filter</button>
-      {filterPress && <div className='filters'>{checkboxArr}</div>}
-      <div>{filteredProjects}</div>
+      {/* <div>
+        <span id="username"> Hello,  </span>
+      </div> */}
+      {filterPress && <div className="filters">{checkboxArr}</div>}
+      <div className="project-card-container">{filteredProjects}</div>
     </div>
   );
 };
