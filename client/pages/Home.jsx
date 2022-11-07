@@ -35,7 +35,8 @@ const Home = () => {
     'Unreal Engine': false,
     'Spring Boot': false,
   };
-  // this is to pass user information to the home page
+  // this is to serve as a redundancy for filteredProjects
+  // we could just throw this in a variable defined in the global scope but it's fine at this point
   const [projectArr, setProjectArr] = useState([]);
   // this is going to contain the filtered state
   const [filteredProjects, setFilteredProjects] = useState([]);
