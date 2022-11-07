@@ -16,7 +16,6 @@ import SignUp from './pages/SignUp.jsx';
 const App = () => {
   return (
     <BrowserRouter>
-      {/* <Sidebar /> */}
       <Routes>
         <Route path='/' element={<Login />}></Route>
         <Route path='/signup' element={<SignUp />}></Route>

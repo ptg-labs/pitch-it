@@ -56,16 +56,16 @@ const SignUp = () => {
   return (
     <div className='auth-page'>
       {/* The button has a type submit, which will trigger the onSubmit functionality */}
-      <form className='form' onSubmit={handleSubmit}>
+      <form id='' className='form' onSubmit={handleSubmit}>
         <input
-          className='username'
+          className='input-form'
           type='text'
           placeholder='UserName'
           value={inputData.username}
           onChange={(e) => handleInputChange(e, 'username')}
         ></input>
         <input
-          className='password'
+          className='input-form'
           type={hidePW ? 'password' : 'text'}
           placeholder='Password'
           value={inputData.password}

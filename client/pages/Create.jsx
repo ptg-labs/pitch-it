@@ -115,7 +115,7 @@ const Create = () => {
     })();
   };
   return (
-    <div>
+    <div className='project-card-layout'>
       <form id='project-creation-form' onSubmit={handleSubmit}>
         <h1>Project Creation!</h1>
         {duplicate && (
