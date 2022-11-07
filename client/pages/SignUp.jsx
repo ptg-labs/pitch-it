@@ -49,7 +49,7 @@ const SignUp = () => {
             return navigate('/');
           });
       } catch (err) {
-        console.log('Broke in logging in');
+        alert ('Please enter a valid username and password');
       }
     })();
   };
