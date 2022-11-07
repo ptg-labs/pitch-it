@@ -58,6 +58,7 @@ const Home = () => {
         .map((skill) => skill[0]);
       // set a filtered Projects state, projectArr is a redundancy so that the filter never returns an empty page with nothing
       setFilteredProjects((prevState) => {
+        console.log(projectArr);
         const activeFilter = projectArr.filter((project) => {
           return activeSkills.every((skill) =>
             project.props.skills.includes(skill)
