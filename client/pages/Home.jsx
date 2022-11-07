@@ -37,15 +37,22 @@ const Home = () => {
   };
   // this is to pass user information to the home page
   const [projectArr, setProjectArr] = useState([]);
+  // this is going to contain the filtered state
+  const [filteredProjects, setFilteredProjects] = useState([]);
   // this hook will conditionally render the potential filters
   const [filterPress, setFilterPress] = useState(false);
   // this state hook will say which filters are active
   const [skillState, setSkillState] = useState(skillsObj);
   const handleClick = (skill) => {
-    return setSkillState((prevState) => ({
-      ...prevState,
-      [skill]: !prevState[skill],
-    }));
+    setSkillState((prevState) => {
+      const stateReturn = {
+        ...prevState,
+        [skill]: !prevState[skill],
+      };
+      console.log(stateReturn);
+      console.log(projectArr);
+      return stateReturn;
+    });
   };
   const checkboxArr = [];
   for (const skill in skillState) {
@@ -67,7 +74,6 @@ const Home = () => {
         .then((response) => response.data)
         .then((data) => {
           return data.map((obj) => {
-            console.log(obj);
             return (
               <Project
                 key={obj.id.toString()}
@@ -99,7 +105,7 @@ const Home = () => {
       </div>
       <button onClick={() => setFilterPress(!filterPress)}>Filter</button>
       {filterPress && <div className='filters'>{checkboxArr}</div>}
-      <div>{projectArr}</div>
+      <div>{filteredProjects.length === 0 ? projectArr : filteredProjects}</div>
     </div>
   );
 };
