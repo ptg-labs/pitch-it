@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Project from '../components/Project.jsx';
+import '../styles/myprojects.scss';
 
 /* 
   MyProjects needs:
@@ -63,14 +64,21 @@ const MyProjects = () => {
   }, [myProjects]);
   // if (myProjects.length === myProjects.length) return null;
   return (
-    <div>
-      <div>MyProjects</div>
-      <Link to={'/create'}>
-        <button id='create-project' type='button'>
-          Create a new project!
-        </button>
-      </Link>
-      {myProjects}
+    <div id="myprojects-div">
+      <div className="myproject-header">My Pitches</div>
+      <hr />
+      <div className="myprojects-button-container">
+        <Link to={'/create'}>
+          <button
+            id="create-project"
+            type="button"
+          >
+            Pitch a new project!
+          </button>
+        </Link>
+      </div>
+
+      <div className="project-card-container">{myProjects}</div>
     </div>
   );
 };

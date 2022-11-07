@@ -10,6 +10,7 @@ import Favorites from './pages/Favorites.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import SidebarLayout from './components/SidebarLayout.jsx';
 import SignUp from './pages/SignUp.jsx';
+import LoginTwo from './pages/LoginTwo.jsx';
 // Do we need to hang MainContainer from App or from Login?
 
 // ONLY USE ROUTES
@@ -17,15 +18,36 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Login />}></Route>
-        <Route path='/signup' element={<SignUp />}></Route>
+        <Route
+          path="/"
+          element={<LoginTwo />}
+        ></Route>
+        <Route
+          path="/signup"
+          element={<SignUp />}
+        ></Route>
         <Route element={<SidebarLayout />}>
-          <Route path='/home' element={<Home />}></Route>
-          <Route path='/MyProjects' element={<MyProjects />}></Route>
-          <Route path='/Favorites' element={<Favorites />}></Route>
-          <Route path='/create' element={<Create />}></Route>
+          <Route
+            path="/home"
+            element={<Home />}
+          ></Route>
+          <Route
+            path="/MyProjects"
+            element={<MyProjects />}
+          ></Route>
+          <Route
+            path="/Favorites"
+            element={<Favorites />}
+          ></Route>
+          <Route
+            path="/create"
+            element={<Create />}
+          ></Route>
         </Route>
-        <Route path='*' element={<Error />}></Route>
+        <Route
+          path="*"
+          element={<Error />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );

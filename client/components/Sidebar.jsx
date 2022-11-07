@@ -16,7 +16,7 @@ const Sidebar = () => {
           className="logo-section"
         >
           {/* <img src={logo} alt="art"/> */}
-          <span className="navbuttons">TeamFinder</span>
+          <span className="navbuttons">PitchIt</span>
         </Link>
         <ul className="side-link">
           <li key={1}>
@@ -24,7 +24,7 @@ const Sidebar = () => {
               to={'/myprojects'}
               className="navbuttons"
             >
-              My Projects
+              My Pitches
             </Link>
           </li>
           <li>

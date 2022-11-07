@@ -8,8 +8,12 @@ const Checkbox = ({ skill, handleClick, type }) => {
   return (
     <div>
       <button
+        className="skill-button"
         type={type}
-        style={{ backgroundColor: toggle ? '#FFF' : 'lightblue' }}
+        style={{
+          backgroundColor: toggle ? '#3259b3' : '#CCDCFF',
+          color: toggle ? 'whitesmoke' : 'black',
+        }}
         id={skill}
         name={skill}
         onClick={() => {

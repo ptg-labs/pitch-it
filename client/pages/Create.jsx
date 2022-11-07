@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Checkbox from '../components/Checkbox.jsx';
+import '../styles/create.scss';
 
 /*
   Create button needs:
@@ -50,7 +51,7 @@ const Create = () => {
     skillState[skill];
     checkboxArr.push(
       <Checkbox
-        type='button'
+        type="button"
         key={skill}
         skill={skill}
         handleClick={handleClick}
@@ -115,45 +116,49 @@ const Create = () => {
     })();
   };
   return (
-    <div className='project-card-layout'>
-      <form id='project-creation-form' onSubmit={handleSubmit}>
-        <h1>Project Creation!</h1>
+    <div className="project-card-layout">
+      <form
+        id="project-creation-form"
+        onSubmit={handleSubmit}
+      >
+        <h1 id='create-header'>What project would you like to pitch?</h1>
+        <hr />
         {duplicate && (
           <>
-            <span className='duplicate-error'>
+            <span className="duplicate-error">
               A project with this name already exists.
             </span>
             <br></br>
           </>
         )}
         {!valid && (
-          <span className='input-error'>
+          <span className="input-error">
             Please enter valid project information.
           </span>
         )}
-        <div className='field'>
+        <div className="field">
           <label>Project Title:</label>
           <input
-            type='text'
-            id='project-name'
-            name='project-name'
+            type="text"
+            id="project-name"
+            name="project-name"
             value={inputData.project_name}
-            placeholder='Enter a title for your project'
+            placeholder="Enter a title for your project"
             onChange={(e) => handleInputChange(e, 'project_name')}
           />
         </div>
-        <div className='field'>
+        <div className="field">
           <label>Description:</label>
           <input
-            type='text'
-            id='project-description'
-            name='project-description'
+            type="text"
+            id="project-description"
+            name="project-description"
             value={inputData.description}
-            placeholder='Enter a short description of your project'
+            placeholder="Enter a short description of your project"
             onChange={(e) => handleInputChange(e, 'description')}
           />
         </div>
-        <div className='field'>
+        <div className="field">
           <label>Needed Skills:</label>
           {/* <input
             type='text'
@@ -163,9 +168,9 @@ const Create = () => {
             placeholder='Enter a description of the Teammates you would like to find!'
             onChange={(e) => handleInputChange(e, 'skillset')}
           /> */}
-          <div className='filters'>{checkboxArr}</div>
+          <div className="filters">{checkboxArr}</div>
         </div>
-        <button type='submit'>Create Project</button>
+        <button type="submit">Create Project</button>
       </form>
     </div>
   );
