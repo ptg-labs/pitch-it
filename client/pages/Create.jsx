@@ -81,6 +81,7 @@ const Create = () => {
       // If we read a truthy value in our skillState object
       if (skillState[skill])
         // push the index to the filteredSkills array
+        // SQL indicies start at 1 so we should add 1 to each value
         filteredSkills.push(Object.keys(skillsObj).indexOf(skill) + 1);
     }
     const date = new Date();
