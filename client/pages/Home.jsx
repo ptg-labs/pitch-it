@@ -43,15 +43,31 @@ const Home = () => {
   const [filterPress, setFilterPress] = useState(false);
   // this state hook will say which filters are active
   const [skillState, setSkillState] = useState(skillsObj);
+  // this handle click fires whenever a skill is selected
   const handleClick = (skill) => {
+    // first we change the state of the selected skill
     setSkillState((prevState) => {
-      const stateReturn = {
+      // update the previous state's skills
+      const updatedSkills = {
         ...prevState,
         [skill]: !prevState[skill],
       };
-      console.log(stateReturn);
-      console.log(projectArr);
-      return stateReturn;
+      // pick out only the truthy/active skills and create a new array from them
+      const activeSkills = Object.entries(updatedSkills)
+        .filter((skill) => skill[1])
+        .map((skill) => skill[0]);
+      // set a filtered Projects state, projectArr is a redundancy so that the filter never returns an empty page with nothing
+      setFilteredProjects((prevState) => {
+        const activeFilter = projectArr.filter((project) => {
+          return activeSkills.every((skill) =>
+            project.props.skills.includes(skill)
+          )
+            ? true
+            : false;
+        });
+        return activeFilter;
+      });
+      return updatedSkills;
     });
   };
   const checkboxArr = [];
@@ -87,7 +103,10 @@ const Home = () => {
             );
           });
         })
-        .then((arr) => setProjectArr(arr));
+        .then((arr) => {
+          setProjectArr(arr);
+          setFilteredProjects(arr);
+        });
     } catch (err) {
       alert("couldn't find project");
     }
@@ -105,7 +124,7 @@ const Home = () => {
       </div>
       <button onClick={() => setFilterPress(!filterPress)}>Filter</button>
       {filterPress && <div className='filters'>{checkboxArr}</div>}
-      <div>{filteredProjects.length === 0 ? projectArr : filteredProjects}</div>
+      <div>{filteredProjects}</div>
     </div>
   );
 };
