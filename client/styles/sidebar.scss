@@ -1,9 +1,45 @@
 aside {
-  width: 5%;
-  //   position: absolute;
-  //   top: 0;
-  //   bottom: 0;
+  width: 7%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
 }
 .aside-wrapper {
-  background: radial-gradient(1000px at 0% 2.1%, #3259b3 0.3%, #45147e 100%);
+  background: radial-gradient(600px at 0% 2.1%, #3259b3 0.3%, #45147e 100%);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.side-link {
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbuttons {
+  background-image: linear-gradient(
+    to right,
+    #45147e 0%,
+    #3259b3 51%,
+    #614385 100%
+  );
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  display: block;
+}
+
+.navbuttons:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
 }
