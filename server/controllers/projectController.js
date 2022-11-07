@@ -95,7 +95,6 @@ projectController.getMyProject = (req, res, next) => {
         mergedProjects.push(project);
         return true;
       });
-      console.log(mergedProjects);
       // If our query returns null, just send back false to our front end
       if (!projects) return res.status(400).json(false);
       return res.status(200).json(mergedProjects);
