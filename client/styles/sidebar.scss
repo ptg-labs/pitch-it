@@ -8,7 +8,7 @@ aside {
 .aside-wrapper {
   width: 110px;
   background: radial-gradient(
-    1000px at 0% 2.1%,
+    750px at 0% 2.1%,
     rgb(92, 188, 242) 0.3%,
     rgb(87, 82, 212) 100%
   );
@@ -46,11 +46,23 @@ a:link {
   border-color: black;
   display: block;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 300;
 }
 
 .navbuttons:hover {
   background-position: right center; /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
+}
+
+#logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    height: 40px;
+    width: 40px;
+    background-color: inherit;
+  }
 }

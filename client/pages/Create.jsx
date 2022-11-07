@@ -121,7 +121,7 @@ const Create = () => {
         id="project-creation-form"
         onSubmit={handleSubmit}
       >
-        <h1 id='create-header'>What project would you like to pitch?</h1>
+        <h1 id='create-header'>Create Pitch</h1>
         <hr />
         {duplicate && (
           <>
@@ -170,7 +170,7 @@ const Create = () => {
           /> */}
           <div className="filters">{checkboxArr}</div>
         </div>
-        <button type="submit">Create Project</button>
+        <button id="create-button" type="submit">Pitch it!</button>
       </form>
     </div>
   );

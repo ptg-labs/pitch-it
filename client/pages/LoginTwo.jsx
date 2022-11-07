@@ -69,7 +69,7 @@ const LoginTwo = () => {
     })();
   };
   return (
-    <body className="login">
+    <main className="login">
       <div className="svg-top">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +195,7 @@ const LoginTwo = () => {
           </footer>
         </section>
       </section>
-    </body>
+    </main>
   );
 };
 

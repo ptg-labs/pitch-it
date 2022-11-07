@@ -11,8 +11,14 @@
   justify-content: space-between;
   width: 80%;
   border-radius: 8px;
-  background-color: white;
+  background-color: whitesmoke;
+  font-size: 22px;
+  // background-color: rgb(243, 243, 243);
   div {
-    background-color: white;
+    background-color: inherit;
   }
+}
+.title {
+  text-align: center;
+  font-size: 32px;
 }

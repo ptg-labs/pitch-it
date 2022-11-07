@@ -1,6 +1,6 @@
 // styles shit
 * {
-  background-color: whitesmoke;
+  background-color: inherit;
   font-family: 'Novo', sans-serif;
 }
 
@@ -13,4 +13,18 @@
   button {
     border-radius: 8px;
   }
+}
+hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 99%;
+  background: radial-gradient(
+    2000px at 0% 2.1%,
+    rgb(92, 188, 242) 0.3%,
+    rgb(87, 82, 212) 100%
+  ) !important;
+
+  height: 2px;
+  // margin-top: 25px;
 }
