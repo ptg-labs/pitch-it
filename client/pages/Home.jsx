@@ -122,7 +122,7 @@ const Home = () => {
     <div>
       <div>Home</div>
       <div>
-        <span id='username'> Hello, {localStorage.getItem('username')} </span>
+        <span id="username"> Hello, {localStorage.getItem('username')} </span>
       </div>
       <button onClick={() => setFilterPress(!filterPress)}>Filter</button>
       {filterPress && <div className='filters'>{checkboxArr}</div>}

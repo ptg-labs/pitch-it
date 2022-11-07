@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import '../styles/sidebar.scss';
 
 // import sidebar paths and icons -> for now we just make a file with an array of objects
 // import {sideBarMenu, socialIcons} from "../../data/data";
@@ -8,32 +9,31 @@ import { Link, NavLink } from 'react-router-dom';
 const Sidebar = () => {
   return (
     // Everything in a certain side
-    <aside className='aside'>
-      <div className='aside-wrapper'>
-        <Link to={'/home'} className='logo-section'>
+    <aside className="aside">
+      <div className="aside-wrapper">
+        <Link
+          to={'/home'}
+          className="logo-section"
+        >
           {/* <img src={logo} alt="art"/> */}
-          <span className='switch__color'>TeamFinder</span>
+          <span className="navbuttons">TeamFinder</span>
         </Link>
-        <ul className='side-link'>
+        <ul className="side-link">
           <li key={1}>
-            <NavLink
+            <Link
               to={'/myprojects'}
-              className={({ isActive }) => {
-                return isActive ? 'nav__links active-links' : 'nav__links';
-              }}
+              className="navbuttons"
             >
               My Projects
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink
+            <Link
               to={'/Favorites'}
-              className={({ isActive }) => {
-                return isActive ? 'nav__links active-links' : 'nav__links';
-              }}
+              className="navbuttons"
             >
               Favorites
-            </NavLink>
+            </Link>
           </li>
           {}
         </ul>
