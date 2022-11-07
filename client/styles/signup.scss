@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
+$body-color: #373943;
+$brand-primary: rgb(92, 188, 242);
+$brand-light-primary: rgb(87, 82, 212);
+
+.signup {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  background-color: $body-color;
+  font-family: 'Roboto', sans-serif;
+  .svg-top {
+    position: absolute;
+    top: -900px;
+    right: -300px;
+  }
+  .svg-bottom {
+    position: absolute;
+    bottom: -500px;
+    left: -200px;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-top: 50px;
+  .wrapper {
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 20px;
+    width: 350px;
+    z-index: 1;
+    header {
+      margin-bottom: 40px;
+      .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+          font-size: 18px;
+          color: #fff;
+        }
+      }
+      h1 {
+        color: $body-color;
+        font-size: 35px;
+        font-weight: 500;
+        margin-bottom: 0;
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      p {
+        color: $brand-primary;
+        font-size: 18px;
+        font-weight: 300;
+        margin: 5px 0 0 0;
+      }
+    }
+    .main-content {
+      input {
+        border: none;
+        display: block;
+        width: 100%;
+        height: 50px;
+        margin: 15px 0;
+        font-size: 18px;
+        color: #999;
+        &::placeholder {
+          color: #999;
+          font-size: 18px;
+          font-weight: 300;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+      .line {
+        width: 100%;
+        height: 2px;
+        background-color: #99999955;
+      }
+      button {
+        background: linear-gradient(
+          to right,
+          $brand-primary,
+          $brand-light-primary
+        );
+        border: none;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: 300;
+        color: #fff;
+        display: block;
+        width: 100px;
+        height: 40px;
+        margin: 0 auto;
+        outline: none;
+        cursor: pointer;
+      }
+    }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 60px;
+      p {
+        margin: 0;
+        font-weight: 100;
+        a {
+          color: $brand-primary;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+  .wrapper {
+    margin: 0 10px !important;
+    padding: 30px;
+    header {
+      h1 {
+        font-size: 30px;
+      }
+    }
+  }
+}

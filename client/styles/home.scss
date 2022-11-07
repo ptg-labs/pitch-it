@@ -1,11 +1,4 @@
 // styles shit
-* {
-  background-color: whitesmoke;
-  font-family: 'Novo', sans-serif;
-}
-body {
-  background-color: whitesmoke;
-}
 $brand-primary: #b6b7cb;
 $brand-light-primary: #17d7fa;
 
@@ -19,11 +12,11 @@ $brand-light-primary: #17d7fa;
 //     border-radius: 8px;
 //   }
 // }
-
 #homepage-div {
   margin-left: 110px;
 }
 #Home {
+  margin-block: 2px;
   font-size: 60px;
   //   background: linear-gradient(
   //     90deg,
@@ -31,10 +24,11 @@ $brand-light-primary: #17d7fa;
   //     rgba(38, 202, 209, 1) 82%,
   //     rgba(241, 241, 247, 0.8127626050420168) 100%
   //   );
-  color: rgb(43, 41, 41);
+  color: whitesmoke;
   border-width: 2px;
   border-radius: 15px;
   padding-left: 10px;
+  padding-block: 9.5px;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
 }
@@ -63,9 +57,10 @@ $brand-light-primary: #17d7fa;
 }
 
 .filter-button {
+  margin-block: 20px;
   border-radius: 8px;
   padding: 4px;
-  background: linear-gradient(to right, $brand-primary, $brand-light-primary);
+  background: linear-gradient(to right, rgb(92, 188, 242), rgb(87, 82, 212));
   border: none;
   border-radius: 50px;
   font-size: 18px;

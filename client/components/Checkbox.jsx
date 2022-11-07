@@ -11,7 +11,7 @@ const Checkbox = ({ skill, handleClick, type }) => {
         className="skill-button"
         type={type}
         style={{
-          backgroundColor: toggle ? '#3259b3' : '#CCDCFF',
+          backgroundColor: toggle ? 'rgb(87, 82, 212)' : '#b6b7cb',
           color: toggle ? 'whitesmoke' : 'black',
         }}
         id={skill}
