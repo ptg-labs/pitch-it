@@ -11,12 +11,17 @@ const defaultErr = {
 
 // retrieves all projects
 projectController.getAllProjects = (req, res, next) => {
-  const queryStr = `SELECT * FROM projects`;
+  // Original Query Str
+  // const queryStr = `SELECT * FROM projects`;
+  // Join table Query Str
+  const queryStr = `SELECT pr.*, s.* FROM projects_skills_join_table jt JOIN projects pr ON jt.project_id = pr.id JOIN skills s ON jt.skill_id = s.id`;
   db.query(queryStr)
     .then((data) => {
       return data.rows;
     })
     .then((projects) => {
+      // ! We are getting back an array of objects with repeats because each object has a unique skill field
+      console.log(projects);
       // If our query returns null, just send back false to our front end
       if (!projects) return res.status(400).json(false);
       return res.status(200).json(projects);
@@ -82,6 +87,7 @@ projectController.addProject = (req, res, next) => {
     req.body;
   console.log(req.body.skills);
   const queryStr = `INSERT INTO projects(owner_id, project_name, date, description, owner_name) VALUES ('${owner_id}','${project_name}','${date}','${description}','${owner_name}') RETURNING id`;
+  // send off a nested query to our database, effectively adding to the projects and join table with one user click
   db.query(queryStr)
     .then((data) => {
       // By using RETURNING id in conjunction with the insert into, we can store the new project's primary key in insertedId
@@ -93,7 +99,7 @@ projectController.addProject = (req, res, next) => {
       for (const value of skills) {
         multipleStringArr.push(`('${insertedId}', '${value}')`);
       }
-      // create a single string
+      // create a single string, getting rid of all the backticks
       const multipleString = multipleStringArr.join(',').replaceAll('`', '');
       const queryStr2 = `INSERT INTO projects_skills_join_table (project_id, skill_id) VALUES${multipleString}`;
       db.query(queryStr2)
