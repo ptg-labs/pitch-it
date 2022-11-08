@@ -12,8 +12,13 @@ $brand-light-primary: #17d7fa;
 //     border-radius: 8px;
 //   }
 // }
+
 #homepage-div {
   margin-left: 110px;
+  width: 96.7%;
+  overflow-y: scroll;
+  position: relative;
+  height: 100vh;
 }
 #Home {
   margin-block: 2px;

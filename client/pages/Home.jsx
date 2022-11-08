@@ -137,6 +137,7 @@ const Home = () => {
       </div> */}
       {filterPress && <div className="filters">{checkboxArr}</div>}
       <div className="project-card-container">{filteredProjects}</div>
+      <br></br>
     </div>
   );
 };
