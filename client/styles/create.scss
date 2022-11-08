@@ -1,0 +1,66 @@
+$brand-primary: #b6b7cb;
+$brand-light-primary: #17d7fa;
+
+.project-card-layout {
+  margin-left: 110px;
+}
+
+#create-header {
+  margin-block: 0px;
+  font-size: 60px;
+  color: whitesmoke;
+  padding-left: 10px;
+  border-radius: 15px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  padding-block: 9.5px;
+}
+
+#create-button {
+  margin-block: 20px;
+  border-radius: 8px;
+  padding: 4px;
+  background: linear-gradient(to right, rgb(92, 188, 242), rgb(87, 82, 212));
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 300;
+  color: #fff;
+  display: block;
+  width: 100px;
+  height: 40px;
+  margin-left: 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+.field {
+  font-size: 22px;
+  color: whitesmoke;
+  padding: 20px;
+}
+
+label {
+  margin-right: 5px;
+}
+
+input {
+  font-size: 22px;
+  background-color: whitesmoke;
+  height: 26px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-block: 6px;
+}
+#project-description {
+  padding-block: 6px;
+  width: 500px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding-left: 10px;
+  font-size: 22px;
+  vertical-align: top;
+}
+#project-name {
+  width: 280px;
+}

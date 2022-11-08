@@ -1,0 +1,59 @@
+$brand-primary: rgb(92, 188, 242);
+$brand-light-primary: rgb(87, 82, 212);
+
+#myprojects-div {
+  margin-left: 110px;
+  display: flex;
+  flex-direction: column;
+}
+
+.myproject-header {
+  font-size: 60px;
+  color: whitesmoke;
+  padding-left: 10px;
+  border-radius: 15px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  padding-block: 9.5px;
+}
+
+#create-project {
+  margin-top: 9px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  padding: 4px;
+  background: linear-gradient(to right, $brand-primary, $brand-light-primary);
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 300;
+  color: #fff;
+  display: block;
+  width: 200px;
+  height: 40px;
+  outline: none;
+  cursor: pointer;
+}
+
+.delete-button {
+  //   position: relative;
+  //   top: -195px;
+  //   left: 657px;
+  width: 25px;
+  position: fixed;
+  margin-top: -1.6%;
+  margin-left: 25.7%;
+  //   width: 25px;
+  padding-block: 4px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  border-style: none;
+  background-color: rgb(221, 76, 76) !important;
+  //   align-self: right;
+}
+
+.myprojects-button-container {
+  margin-top: 3px;
+  margin-inline: 1.8%;
+}
