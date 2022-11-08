@@ -36,4 +36,4 @@ Use cookies and SSID
 Allow team members to chat and share code
 
 ## Contributing
-Rabea Ahmad, Young Kim, Hao Ze Lin, Drew Manley, Kevin Tseng
+Rabea Ahmad, Young Kim, Hao Ze Lin, Drew Manley, Kevin Tseng, Cedar Cooper, Steven Geiger, Debbie Z, Yufa Li, Michael Costello
