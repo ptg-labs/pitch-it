@@ -29,11 +29,13 @@ $brand-light-primary: #17d7fa;
   display: block;
   width: 100px;
   height: 40px;
+  margin-left: 20px;
   outline: none;
   cursor: pointer;
 }
 
 .field {
+  font-size: 22px;
   color: whitesmoke;
   padding: 20px;
 }
@@ -46,10 +48,19 @@ input {
   font-size: 22px;
   background-color: whitesmoke;
   height: 26px;
-  #project-description {
-    width: 500px;
-  }
-  #project-name {
-    width: 500px;
-  }
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-block: 6px;
+}
+#project-description {
+  padding-block: 6px;
+  width: 500px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding-left: 10px;
+  font-size: 22px;
+  vertical-align: top;
+}
+#project-name {
+  width: 280px;
 }

@@ -7,10 +7,12 @@
 .filters {
   display: flex;
   margin-block: 10px;
+  margin-left: 1px;
   div {
     margin-inline: 10px;
   }
   button {
+    font-size: 14px;
     border-radius: 8px;
   }
 }
