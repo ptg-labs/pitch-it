@@ -56,6 +56,7 @@ const MyProjects = () => {
       return prevState.filter((obj) => obj.project_id !== project_id);
     });
   };
+  // TODO: FIGURE OUT LESS HACKY WAY TO AVOID INFINITE LOOP
   useEffect(() => {
     if (!ranOnce) {
       getMyProjects();
@@ -69,6 +70,7 @@ const MyProjects = () => {
       <hr />
       <div className="myprojects-button-container">
         <Link to={'/create'}>
+
           <button
             id="create-project"
             type="button"

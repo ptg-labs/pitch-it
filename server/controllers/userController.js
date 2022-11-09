@@ -13,9 +13,10 @@ const userController = {};
 //     return next({});
 //   }
 // };
-
+// TODO: IMPLEMENT PROPER AUTH
 userController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
+  // TODO: don't get sql injected
   const queryStr = `SELECT users.id, users.username FROM users WHERE users.username='${username}' AND users.password='${password}'`;
   db.query(queryStr)
     .then((data) => {
@@ -54,6 +55,8 @@ userController.createUser = (req, res, next) => {
       });
     });
 };
+
+// TODO: CREATE UPDATE USER MIDDLEWARE
 
 userController.deleteUser = (req, res, next) => {
   const { user_id } = req.body;

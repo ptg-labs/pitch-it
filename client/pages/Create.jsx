@@ -15,6 +15,7 @@ import '../styles/create.scss';
 
 const Create = () => {
   // this object contains all the skills and initializes their clickState to false
+  // TODO: STASH skillsObj IN A SEPARATE AND IMPORT WHERE NEEDED
   const skillsObj = {
     React: false,
     Express: false,
@@ -85,6 +86,7 @@ const Create = () => {
         // SQL indicies start at 1 so we should add 1 to each value
         filteredSkills.push(Object.keys(skillsObj).indexOf(skill) + 1);
     }
+    // TODO: don't mutate state directly
     const date = new Date();
     inputData.date = date.toDateString();
     inputData.owner_id = localStorage.getItem('user_id');
@@ -110,6 +112,7 @@ const Create = () => {
           return navigate('/myprojects');
         }
       } catch (err) {
+        // TODO: FIX ERROR HANDLER TO NOT SET DUPLICATE FOR ANY ERROR
         console.log('catch block');
         setDuplicate(true);
       }
@@ -171,6 +174,7 @@ const Create = () => {
           /> */}
           <div className="filters">{checkboxArr}</div>
         </div>
+        {/* TODO: FIX PROJECT SUBMISSION HANDLER (BACKEND?) */}
         <button
           id="create-button"
           type="submit"

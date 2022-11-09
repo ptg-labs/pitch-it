@@ -7,7 +7,7 @@ import '../styles/home.scss';
   What do we need from Home component?
   Header component
   Sidebar component
-  Filter buttton (dropdown)
+  Filter button (dropdown)
   Project Card components
 */
 
@@ -36,7 +36,6 @@ const Home = () => {
     'Unreal Engine': false,
     'Spring Boot': false,
   };
-  // this is to serve as a redundancy for filteredProjects
   // we could just throw this in a variable defined in the global scope but it's fine at this point
   const [projectArr, setProjectArr] = useState([]);
   // this is going to contain the filtered state
@@ -55,9 +54,9 @@ const Home = () => {
         [skill]: !prevState[skill],
       };
       // pick out only the truthy/active skills and create a new array from them
-      const activeSkills = Object.entries(updatedSkills)
-        .filter((skill) => skill[1])
-        .map((skill) => skill[0]);
+      const activeSkills = Object.entries(updatedSkills) // array that looks like [[key, value], ...]
+        .filter((skill) => skill[1]) // returning a filtered array of skills that are set to true
+        .map((skill) => skill[0]); // returning an array of the names of the skills from above
       // set a filtered Projects state, projectArr is a redundancy so that the filter never returns an empty page with nothing
       setFilteredProjects((prevState) => {
         console.log(projectArr);
@@ -67,6 +66,7 @@ const Home = () => {
           )
             ? true
             : false;
+          //TODO: redundant ternary 
         });
         return activeFilter;
       });

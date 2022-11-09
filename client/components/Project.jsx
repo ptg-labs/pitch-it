@@ -39,6 +39,7 @@ const Project = ({
       {/* Conditionally render in the delete button*/}
       {/* Maybe even stretch this functionality to trigger if an edit button is clicked? */}
       {handleDelete && (
+        // TODO: MAKE THIS BUTTON NOT UGLY AF
         <button
           className="delete-button"
           onClick={() => {
