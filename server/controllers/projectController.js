@@ -177,6 +177,18 @@ projectController.addProject = (req, res, next) => {
     });
 };
 
+projectController.updateProject = (req, res, next) => {
+  const project_id = req.params.id;
+  const { owner_id, project_name, date, description, owner_name, skills } =
+  req.body;
+  const queryStr = ``;
+  db.query(queryStr)
+    .then(() => {
+      return res.status(200).json(true)
+    })
+}
+
+
 projectController.deleteProject = (req, res, next) => {
   const project_id = req.params.id;
   const queryStr = `DELETE FROM projects WHERE projects.id = '${project_id}'`;
