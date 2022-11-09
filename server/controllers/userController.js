@@ -25,10 +25,10 @@ userController.verifyUser = (req, res, next) => {
     })
     .then((user) => {
       // If our query returns null, just send back false to our front end
-      if (!user) return res.status(400).json(false);
-      return res
-        .status(200)
-        .json({ user_id: user.id, username: user.username });
+      // TODO: put data in res.locals, not the response here
+      if (!user) throw new Error("User not found"); // used to send back falsy but I don't see why we don't just throw error
+      res.locals.user = { user_id: user.id, username: user.username };
+      return next();
     })
     .catch((err) => {
       return next({
@@ -45,7 +45,7 @@ userController.createUser = (req, res, next) => {
   const queryStr = `INSERT INTO "public.users" (username, password) VALUES ('${username}', '${password}')`;
   db.query(queryStr)
     .then(() => {
-      return res.status(200).json(true);
+      return next();
     })
     .catch((err) => {
       return next({
