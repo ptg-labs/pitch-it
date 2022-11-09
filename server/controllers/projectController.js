@@ -14,7 +14,8 @@ projectController.getAllProjects = (req, res, next) => {
   // Original Query Str
   // const queryStr = `SELECT * FROM projects`;
   // Join table Query Str
-  const queryStr = `SELECT s.*, pr.* FROM projects_skills_join_table jt JOIN projects pr ON jt.project_id = pr.id JOIN skills s ON jt.skill_id = s.id`;
+  const queryStr = `SELECT s.*, pr.* FROM "public.projects_skills_join_table" jt 
+  JOIN "public.projects" pr ON jt.project_id = pr.id JOIN "public.skills" s ON jt.skill_id = s.id`;
   db.query(queryStr)
     .then((data) => {
       return data.rows;
@@ -22,7 +23,7 @@ projectController.getAllProjects = (req, res, next) => {
     .then((projects) => {
       // ! We are getting back an array of objects with repeats because each object has a unique skill field
       // We already have a check that ensures that each project's title is unique on the frontend
-      console.log('projects in projectController.getAllProjects', projects)
+      // console.log('projects in projectController.getAllProjects', projects);
       const uniqueTitles = new Set();
       // We have to add to previous values to ones that pass the Set, probably better to do this using reduce but i've already written a bunch of logic using filter
       const mergedProjects = [];
