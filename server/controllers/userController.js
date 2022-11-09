@@ -1,5 +1,5 @@
 const db = require('../models/projectModels');
-
+const bcrypt = require('bcryptjs');
 const userController = {};
 
 // userController.getAllUsers = (req, res, next) => {
@@ -13,7 +13,7 @@ const userController = {};
 //     return next({});
 //   }
 // };
-// TODO: IMPLEMENT PROPER AUTH
+// TODO: IMPLEMENT PROPER AUTH - needs testing now
 userController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
   // TODO: don't get sql injected
@@ -25,10 +25,12 @@ userController.verifyUser = (req, res, next) => {
     })
     .then((user) => {
       // If our query returns null, just send back false to our front end
-      // TODO: put data in res.locals, not the response here
       if (!user) throw new Error("User not found"); // used to send back falsy but I don't see why we don't just throw error
-      res.locals.user = { user_id: user.id, username: user.username };
+      const valid = bcrypt.compareSync(password, user.password) // compareSync, password from req.body should equal password from DB
+      if (valid) {
+        res.locals.user = { user_id: user.id, username: user.username };
       return next();
+      } else throw new Error("Password does not match");
     })
     .catch((err) => {
       return next({
@@ -39,10 +41,13 @@ userController.verifyUser = (req, res, next) => {
     });
 };
 
+const SALT_WORK_FACTOR = 10;
+
 // ! Think about what if user already exists
 userController.createUser = (req, res, next) => {
   const { username, password } = req.body;
-  const queryStr = `INSERT INTO "public.users" (username, password) VALUES ('${username}', '${password}')`;
+  const hashedPW = bcrypt.hashSync(password, 10);
+  const queryStr = `INSERT INTO "public.users" (username, password) VALUES ('${username}', '${hashedPW}')`;
   db.query(queryStr)
     .then(() => {
       return next();
