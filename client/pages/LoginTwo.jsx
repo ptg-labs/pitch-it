@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // import MainContainer from './containers/MainContainer';
 import axios from 'axios';
 import Logo from '../components/Logo.jsx';
-import '../styles/logintwo.scss';
+import '../styles/LoginTwo.scss';
 // import SignUp from './SignUp.jsx';
 
 /*
