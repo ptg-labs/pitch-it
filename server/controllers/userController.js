@@ -17,7 +17,7 @@ const userController = {};
 userController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
   // TODO: don't get sql injected
-  const queryStr = `SELECT public.users.id, public.users.username FROM "public.users" WHERE public.users.username='${username}' AND public.users.password='${password}'`;
+  const queryStr = `SELECT "id", "username" FROM "public.users" WHERE username='${username}' AND password='${password}'`;
   db.query(queryStr)
     .then((data) => {
       console.log(data.rows[0]);

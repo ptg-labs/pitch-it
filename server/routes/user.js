@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 // TODO: REFACTOR MIDDLEWARE TO NOT BE FINAL ENDPOINT HANDLER
+
+//add verify user middleware -- and give 404 response if not valid
 // All requests here are coming in from /user/...
 router.post('/login', userController.verifyUser);
 
