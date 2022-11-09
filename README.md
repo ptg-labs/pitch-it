@@ -37,3 +37,10 @@ Allow team members to chat and share code
 
 ## Contributing
 Rabea Ahmad, Young Kim, Hao Ze Lin, Drew Manley, Kevin Tseng
+
+## Thundergoose Iteration
+Co-authored-by: Yufa Li <112290188+01001101CK@users.noreply.github.com>
+Co-authored-by: Michael Costello <neighbor-peace@users.noreply.github.com>
+Co-authored-by: Steven Geiger <geistnine@users.noreply.github.com>
+Co-authored-by: Debbie Zavaleta <dzavaleta96@users.noreply.github.com>
+Co-authored-by: Cedar Cooper<CedarCooper@users.noreply.github.com>
