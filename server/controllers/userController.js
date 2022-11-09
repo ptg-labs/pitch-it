@@ -48,7 +48,7 @@ userController.createUser = (req, res, next) => {
     })
     .catch((err) => {
       return next({
-        log: 'Error in userController.verifyUser',
+        log: 'Error in userController.createUser',
         status: 400,
         message: { err: err },
       });
