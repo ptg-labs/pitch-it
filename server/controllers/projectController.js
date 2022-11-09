@@ -22,6 +22,7 @@ projectController.getAllProjects = (req, res, next) => {
     .then((projects) => {
       // ! We are getting back an array of objects with repeats because each object has a unique skill field
       // We already have a check that ensures that each project's title is unique on the frontend
+      console.log('projects in projectController.getAllProjects', projects)
       const uniqueTitles = new Set();
       // We have to add to previous values to ones that pass the Set, probably better to do this using reduce but i've already written a bunch of logic using filter
       const mergedProjects = [];
@@ -108,7 +109,7 @@ projectController.getMyProject = (req, res, next) => {
     });
 };
 
-// ! WTF?
+// ! WTF? -- unfinished, unused
 projectController.getProject = (req, res, next) => {
   const { project } = req.body;
   const queryStr = ``;
@@ -152,6 +153,7 @@ projectController.addProject = (req, res, next) => {
       }
       // create a single string, getting rid of all the backticks
       const multipleString = multipleStringArr.join(',').replaceAll('`', '');
+      // TODO: LOOK INTO CREATING BETTER DATABASE THAT UPDATES JOIN TABLES AUTOMATICALLY
       const queryStr2 = `INSERT INTO projects_skills_join_table (project_id, skill_id) VALUES${multipleString}`;
       db.query(queryStr2)
         .then(() => {

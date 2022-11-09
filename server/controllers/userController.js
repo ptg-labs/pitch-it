@@ -13,10 +13,11 @@ const userController = {};
 //     return next({});
 //   }
 // };
-
+// TODO: IMPLEMENT PROPER AUTH
 userController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
-  const queryStr = `SELECT users.id, users.username FROM users WHERE users.username='${username}' AND users.password='${password}'`;
+  // TODO: don't get sql injected
+  const queryStr = `SELECT public.users.id, public.users.username FROM "public.users" WHERE public.users.username='${username}' AND public.users.password='${password}'`;
   db.query(queryStr)
     .then((data) => {
       console.log(data.rows[0]);
@@ -41,7 +42,7 @@ userController.verifyUser = (req, res, next) => {
 // ! Think about what if user already exists
 userController.createUser = (req, res, next) => {
   const { username, password } = req.body;
-  const queryStr = `INSERT INTO users(username,password) VALUES ('${username}', '${password}')`;
+  const queryStr = `INSERT INTO "public.users" (username, password) VALUES ('${username}', '${password}')`;
   db.query(queryStr)
     .then(() => {
       return res.status(200).json(true);
@@ -55,9 +56,11 @@ userController.createUser = (req, res, next) => {
     });
 };
 
+// TODO: CREATE UPDATE USER MIDDLEWARE
+
 userController.deleteUser = (req, res, next) => {
   const { user_id } = req.body;
-  const queryStr = `DELETE FROM users WHERE users.id = '${user_id}'`;
+  const queryStr = `DELETE FROM "public.users" WHERE users.id = '${user_id}'`;
   db.query(queryStr)
     .then(() => {
       return res.status(200).json(true);

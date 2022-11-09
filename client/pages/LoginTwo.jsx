@@ -49,14 +49,15 @@ const LoginTwo = () => {
     // do a check on the input types
     if (!inputData.username || !inputData.password) return setValid(false);
     // Send an asynchronous post request to our server, which should handle logging in
+    //TODO: Add redirect to login page 
     (async function loginUser() {
       try {
         await axios
-          .post('http://localhost:3000/user/login', inputData)
+          .post('http://localhost:3000/user/login', inputData) // sending inputData which has username, password
           .then((response) => {
             setValid(false);
             setInputData(initialInputState);
-            return response.data;
+            return response.data; // interesting that this isn't just getting parsed
           })
           .then((data) => {
             localStorage.setItem('username', data.username);
@@ -173,6 +174,7 @@ const LoginTwo = () => {
                 value={inputData.password}
                 onChange={(e) => handleInputChange(e, 'password')}
               />
+              {/*TODO: Redirect user to home page when they create an account*/}
               <button type="submit">Login</button>
               {/* Conditionally render an error message if the user input is invalid */}
               {!valid && (
