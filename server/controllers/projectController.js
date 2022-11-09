@@ -139,38 +139,33 @@ projectController.getProject = (req, res, next) => {
     });
 };
 
-projectController.addProject = (req, res, next) => {
-  const { owner_id, project_name, date, description, owner_name, skills } =
-    req.body;
+projectController.addProject = async (req, res, next) => {
+  const { owner_id, project_name, description, skills } = req.body;
   console.log(req.body.skills);
-  const queryStr = `INSERT INTO projects(owner_id, project_name, date, description, owner_name) VALUES ('${owner_id}','${project_name}','${date}','${description}','${owner_name}') RETURNING id`;
+  const insertStr = `INSERT INTO "public.projects" (owner_id, project_name, description)
+  VALUES ($1, $2, $3)`;
+  const selectStr = `SELECT * FROM "public.projects" WHERE project_name=$1`;
+  const values = [owner_id, project_name, description];
+  console.log('values arr', values);
   // send off a nested query to our database, effectively adding to the projects and join table with one user click
-  db.query(queryStr)
-    .then((data) => {
-      // By using RETURNING id in conjunction with the insert into, we can store the new project's primary key in insertedId
-      const insertedId = data.rows[0].id;
-      // We need to construct another query string to add to our join table
-      // ! We have a varying amount of rows to enter into our join table.....
-      const multipleStringArr = [];
-      // each value of skills is the primary key to the skill in the skills table
-      for (const value of skills) {
-        multipleStringArr.push(`('${insertedId}', '${value}')`);
-      }
-      // create a single string, getting rid of all the backticks
-      const multipleString = multipleStringArr.join(',').replaceAll('`', '');
-      // TODO: LOOK INTO CREATING BETTER DATABASE THAT UPDATES JOIN TABLES AUTOMATICALLY
-      const queryStr2 = `INSERT INTO projects_skills_join_table (project_id, skill_id) VALUES${multipleString}`;
-      db.query(queryStr2)
-        .then(() => {
-          return res.status(200).json(true);
-        })
-        .catch((err) => {
-          return next({
-            log: 'Error in projectController.addProject join table',
-            status: 400,
-            message: { err: err },
-          });
+  db.query(insertStr, values)
+    .then(() => {
+      // fetch just created row to get id
+      db.query(selectStr, [project_name]).then(({ rows }) => {
+        console.log('rows', rows);
+        const newProjId = rows[0].id;
+        console.log('newProjId', newProjId);
+        const multipleStringArr = [];
+        console.log('skills in projectController.js', skills);
+        for (const value of skills) {
+          multipleStringArr.push(`('${newProjId}', '${value}')`);
+        }
+        const multipleString = multipleStringArr.join(',').replaceAll('`', '');
+        const queryStr2 = `INSERT INTO "public.projects_skills_join_table" (project_id, skill_id) VALUES${multipleString}`;
+        db.query(queryStr2).then(() => {
+          return next();
         });
+      });
     })
     .catch((err) => {
       return next({
@@ -179,6 +174,42 @@ projectController.addProject = (req, res, next) => {
         message: { err: err },
       });
     });
+  // .then((data) => {
+  //   return next();
+  //   // By using RETURNING id in conjunction with the insert into, we can store the new project's primary key in insertedId
+  //   const newProjId = data.rows[0].id;
+  //   console.log('newProjId', newProjId);
+  //   // We need to construct another query string to add to our join table
+  //   // ! We have a varying amount of rows to enter into our join table.....
+  //   const multipleStringArr = [];
+  //   // each value of skills is the primary key to the skill in the skills table
+  //   console.log('skills in projectController.js', skills);
+  //   for (const value of skills) {
+  //     multipleStringArr.push(`('${newProjId}', '${value}')`);
+  //   }
+  //   // create a single string, getting rid of all the backticks
+  // const multipleString = multipleStringArr.join(',').replaceAll('`', '');
+  // // TODO: LOOK INTO CREATING BETTER DATABASE THAT UPDATES JOIN TABLES AUTOMATICALLY
+  // const queryStr2 = `INSERT INTO projects_skills_join_table (project_id, skill_id) VALUES${multipleString}`;
+  // db.query(queryStr2)
+  //   .then(() => {
+  //     return res.status(200).json(true);
+  //   })
+  //   .catch((err) => {
+  //     return next({
+  //       log: 'Error in projectController.addProject join table',
+  //       status: 400,
+  //       message: { err: err },
+  //     });
+  //   });
+  // })
+  // .catch((err) => {
+  //   return next({
+  //     log: 'Error in projectController.addProject',
+  //     status: 400,
+  //     message: { err: err },
+  //   });
+  // });
 };
 
 projectController.deleteProject = (req, res, next) => {
