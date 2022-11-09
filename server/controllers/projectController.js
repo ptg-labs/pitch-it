@@ -65,8 +65,12 @@ projectController.getAllProjects = (req, res, next) => {
 projectController.getMyProject = (req, res, next) => {
   const user_id = req.params.id;
   // ! For some reason, the project MUST be the second select or else the skill ID will be returned
-  const queryStr = `SELECT s.*, pr.* FROM projects_skills_join_table jt JOIN skills s ON jt.skill_id = s.id JOIN projects pr ON jt.project_id = pr.id WHERE pr.owner_id='${user_id}'`;
-  db.query(queryStr)
+  const queryStr = `SELECT s.*, pr.* FROM "public.projects_skills_join_table" jt 
+  JOIN "public.skills" s ON jt.skill_id = s.id 
+  JOIN "public.projects" pr ON jt.project_id = pr.id 
+  WHERE pr.owner_id=$1`;
+  const values = [user_id];
+  db.query(queryStr, values)
     .then((data) => {
       return data.rows;
     })
