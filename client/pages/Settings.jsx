@@ -16,11 +16,14 @@ export default function Settings() {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get('http://localhost:3000/user').then(({ data }) => {
-      console.log('data from get /user', data);
-      setUsername(data.username);
+    axios.patch('http://localhost:3000/user/settings').then((resp) => {
+      console.log('data from get /user', resp);
+      // setUsername(data.username);
     });
   }, []);
+
+  const username = localStorage.getItem(username);
+  console.log(username);
   const toggleModal = () => {
     setModalIsOpen((prevState) => !prevState);
     setPasswordsMatch(true);
@@ -32,7 +35,7 @@ export default function Settings() {
   // TODO: CREATE deleteAccount function
   const deleteAccount = () => {
     console.log('deleting account');
-    axios.delete('http://localhost:3000/user').then(() => {
+    axios.delete('http://localhost:3000/user/settings').then(() => {
       console.log('acct deleted');
       navigate('/signup');
     });
