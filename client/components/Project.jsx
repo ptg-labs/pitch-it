@@ -6,7 +6,7 @@ import '../styles/project-cards.scss';
 
 const Project = (props) => {
   const {
-    owner_name,
+    username,
     project_id,
     title,
     description,
@@ -27,7 +27,7 @@ const Project = (props) => {
       </div>
       <hr />
       <div>
-        <b style={{ backgroundColor: 'inherit' }}>Created By:</b> {owner_name}
+        <b style={{ backgroundColor: 'inherit' }}>Created By:</b> {username}
       </div>
       <div>
         <b style={{ backgroundColor: 'inherit' }}>Description:</b> {description}
