@@ -10,25 +10,25 @@ import Logo from './Logo.jsx';
 const Sidebar = () => {
   return (
     // Everything in a certain side
-    <aside className="aside">
-      <div className="aside-wrapper">
+    <aside className='aside'>
+      <div className='aside-wrapper'>
         <Link
           to={'/home'}
-          id="logo-section"
+          id='logo-section'
         >
           {/* <img src={logo} alt="art"/> */}
           <span
-            id="logo"
-            className="navbuttons"
+            id='logo'
+            className='navbuttons'
           >
             <Logo />
           </span>
         </Link>
-        <ul className="side-link">
+        <ul className='side-link'>
           <li key={1}>
             <Link
               to={'/myprojects'}
-              className="navbuttons"
+              className='navbuttons'
             >
               My Pitches
             </Link>
@@ -36,9 +36,17 @@ const Sidebar = () => {
           <li>
             <Link
               to={'/Favorites'}
-              className="navbuttons"
+              className='navbuttons'
             >
               Favorites
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={'/Settings'}
+              className='navbuttons'
+            >
+              Settings
             </Link>
           </li>
           {}

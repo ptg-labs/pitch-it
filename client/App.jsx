@@ -11,6 +11,7 @@ import Sidebar from './components/Sidebar.jsx';
 import SidebarLayout from './components/SidebarLayout.jsx';
 import SignUp from './pages/SignUp.jsx';
 import LoginTwo from './pages/LoginTwo.jsx';
+import Settings from './pages/Settings.jsx';
 // Do we need to hang MainContainer from App or from Login?
 
 // ONLY USE ROUTES
@@ -19,33 +20,37 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path='/'
           element={<LoginTwo />}
         ></Route>
         <Route
-          path="/signup"
+          path='/signup'
           element={<SignUp />}
         ></Route>
         <Route element={<SidebarLayout />}>
           <Route
-            path="/home"
+            path='/home'
             element={<Home />}
           ></Route>
           <Route
-            path="/MyProjects"
+            path='/MyProjects'
             element={<MyProjects />}
           ></Route>
           <Route
-            path="/Favorites"
+            path='/Favorites'
             element={<Favorites />}
           ></Route>
           <Route
-            path="/create"
+            path='/create'
             element={<Create />}
           ></Route>
+          <Route
+            path='/Settings'
+            element={<Settings />}
+          />
         </Route>
         <Route
-          path="*"
+          path='*'
           element={<Error />}
         ></Route>
       </Routes>
