@@ -4,9 +4,7 @@ import '../styles/sidebar.scss';
 import Logo from './Logo.jsx';
 
 // import sidebar paths and icons -> for now we just make a file with an array of objects
-// import {sideBarMenu, socialIcons} from "../../data/data";
-//import './sidebar.scss';
-// import logo from './logo.png';
+//route to different pages(components) by using react router 
 const Sidebar = () => {
   return (
     // Everything in a certain side
@@ -49,13 +47,13 @@ const Sidebar = () => {
               Settings
             </Link>
           </li>
-          {}
+          { }
         </ul>
       </div>
     </aside>
   );
-};
-
+}
+//potentially delete
 // const Sidebar = () => {
 //   return(
 //       // Everything in a certain side
