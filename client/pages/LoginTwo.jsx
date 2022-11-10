@@ -49,7 +49,7 @@ const LoginTwo = () => {
     // do a check on the input types
     if (!inputData.username || !inputData.password) return setValid(false);
     // Send an asynchronous post request to our server, which should handle logging in
-    //TODO: Add redirect to login page 
+    //TODO: Add redirect to login page
     (async function loginUser() {
       try {
         await axios
@@ -70,115 +70,115 @@ const LoginTwo = () => {
     })();
   };
   return (
-    <main className="login">
-      <div className="svg-top">
+    <main className='login'>
+      <div className='svg-top'>
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          width="1337"
-          height="1337"
+          xmlns='http://www.w3.org/2000/svg'
+          xmlnsXlink='http://www.w3.org/1999/xlink'
+          width='1337'
+          height='1337'
         >
           <defs>
             <path
-              id="path-1"
-              fillRule="evenodd"
-              d="M1337 668.5c0 368.955-299.545 668.5-668.5 668.5-144.827 0-331.5-101-298-243C434.038 824.673 0 892.628 0 668.5 0 299.545 299.545 0 668.5 0S1337 299.545 1337 668.5z"
-              opacity="1"
+              id='path-1'
+              fillRule='evenodd'
+              d='M1337 668.5c0 368.955-299.545 668.5-668.5 668.5-144.827 0-331.5-101-298-243C434.038 824.673 0 892.628 0 668.5 0 299.545 299.545 0 668.5 0S1337 299.545 1337 668.5z'
+              opacity='1'
             ></path>
             <linearGradient
-              id="linearGradient-2"
-              x1="0.79"
-              x2="0.21"
-              y1="0.62"
-              y2="0.86"
+              id='linearGradient-2'
+              x1='0.79'
+              x2='0.21'
+              y1='0.62'
+              y2='0.86'
             >
               <stop
-                offset="0"
-                stopColor="#583ED5"
+                offset='0'
+                stopColor='#583ED5'
               ></stop>
               <stop
-                offset="1"
-                stopColor="#17D7FA"
+                offset='1'
+                stopColor='#17D7FA'
               ></stop>
             </linearGradient>
           </defs>
           <use
-            fill="url(#linearGradient-2)"
-            xlinkHref="#path-1"
+            fill='url(#linearGradient-2)'
+            xlinkHref='#path-1'
           ></use>
         </svg>
       </div>
-      <div className="svg-bottom">
+      <div className='svg-bottom'>
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          width="967.885"
-          height="896"
+          xmlns='http://www.w3.org/2000/svg'
+          xmlnsXlink='http://www.w3.org/1999/xlink'
+          width='967.885'
+          height='896'
         >
           <defs>
             <path
-              id="path-2"
-              fillRule="evenodd"
-              d="M896 448c246.633 17.575-200.742 448-448 448S0 695.258 0 448 200.742 0 448 0s27 418 448 448z"
-              opacity="1"
+              id='path-2'
+              fillRule='evenodd'
+              d='M896 448c246.633 17.575-200.742 448-448 448S0 695.258 0 448 200.742 0 448 0s27 418 448 448z'
+              opacity='1'
             ></path>
             <linearGradient
-              id="linearGradient-3"
-              x1="0.5"
-              x2="0.5"
-              y1="0"
-              y2="1"
+              id='linearGradient-3'
+              x1='0.5'
+              x2='0.5'
+              y1='0'
+              y2='1'
             >
               <stop
-                offset="0"
-                stopColor="#28AFF0"
+                offset='0'
+                stopColor='#28AFF0'
               ></stop>
               <stop
-                offset="1"
-                stopColor="#120FC4"
+                offset='1'
+                stopColor='#120FC4'
               ></stop>
             </linearGradient>
           </defs>
           <use
-            fill="url(#linearGradient-3)"
-            xlinkHref="#path-2"
+            fill='url(#linearGradient-3)'
+            xlinkHref='#path-2'
           ></use>
         </svg>
       </div>
 
-      <section class="container">
-        <section class="wrapper">
+      <section className='container'>
+        <section className='wrapper'>
           <header>
-            <div class="logo">
+            <div className='logo'>
               <span>
                 <Logo />
               </span>
             </div>
             <h1>Pitch It</h1>
           </header>
-          <section class="main-content">
+          <section className='main-content'>
             <form
-              action=""
+              action=''
               onSubmit={handleSubmit}
             >
               <input
-                type="text"
-                placeholder="Username"
+                type='text'
+                placeholder='Username'
                 value={inputData.username}
                 onChange={(e) => handleInputChange(e, 'username')}
               />
-              <div class="line"></div>
+              <div className='line'></div>
               <input
                 type={hidePW ? 'password' : 'text'}
-                placeholder="Password"
+                placeholder='Password'
                 value={inputData.password}
                 onChange={(e) => handleInputChange(e, 'password')}
               />
               {/*TODO: Redirect user to home page when they create an account*/}
-              <button type="submit">Login</button>
+              <button type='submit'>Login</button>
               {/* Conditionally render an error message if the user input is invalid */}
               {!valid && (
-                <span className="input-error">
+                <span className='input-error'>
                   Please enter a valid username and password
                 </span>
               )}
@@ -187,8 +187,8 @@ const LoginTwo = () => {
           <footer>
             <p>
               <a
-                href=""
-                title="Register"
+                href=''
+                title='Register'
                 onClick={() => navigate('/signup')}
               >
                 Sign Up
