@@ -16,8 +16,8 @@ const userController = {};
 // TODO: IMPLEMENT PROPER AUTH - needs testing now
 userController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
-  const queryStr = 'SELECT "id", "username", "password" FROM "public.users" WHERE username= ($1) AND password= ($2)';
-  const values = [username, password];
+  const queryStr = 'SELECT "id", "username", "password" FROM "public.users" WHERE username= ($1)';
+  const values = [username];
   db.query(queryStr, values)
     .then((data) => {
       console.log(data.rows[0]);
@@ -27,13 +27,13 @@ userController.verifyUser = (req, res, next) => {
       // If our query returns null, just send back false to our front end
       if (!user) throw new Error("User not found"); // used to send back falsy but I don't see why we don't just throw error
       // TODO: figure out how bcrypt compare can work in this middleware. seems to always return false no matter what here
-      // console.log(user.password + password);
-      // const valid = await bcrypt.compare(password, user.password) 
-      // console.log("valid: ", valid);
-      // if (valid) {
+      console.log(user.password + password);
+      const valid = await bcrypt.compare(password, user.password) 
+      console.log("valid: ", valid);
+      if (valid) {
         res.locals.user = { user_id: user.id, username: user.username };
         return next();
-      // } else throw new Error("Password does not match");
+      } else throw new Error("Password does not match");
     })
     .catch((err) => {
       return next({
@@ -47,12 +47,12 @@ userController.verifyUser = (req, res, next) => {
 const SALT_WORK_FACTOR = 10;
 
 // ! Think about what if user already exists
-userController.createUser = (req, res, next) => {
+userController.createUser = async (req, res, next) => {
   const { username, password } = req.body;
 
-  // const hashedPW = bcrypt.hashSync(password, 10); // commented until bcrypt compare works
+  const hashedPW = await bcrypt.hash(password, SALT_WORK_FACTOR);
   const queryStr = `INSERT INTO "public.users" (username, password) VALUES ($1, $2)`;
-  const values = [username, password];
+  const values = [username, hashedPW];
   db.query(queryStr, values)
     .then(() => {
       return next();
@@ -66,12 +66,12 @@ userController.createUser = (req, res, next) => {
     });
 };
 
-// TODO: CREATE UPDATE USER MIDDLEWARE
-userController.updateUser = (req, res, next) => {
+userController.updateUser = async (req, res, next) => {
   //need a password input from req.body
   //get res.locals.username from jwt controller - make it be middleware before usercontroller.updateuser
   const queryStr = `UPDATE "public.users" SET password= ($1) WHERE id= ($2)`;
-  const values = [req.body.password, res.locals.user_id];
+  const hashedPW = await bcrypt.hash(req.body.password, SALT_WORK_FACTOR);
+  const values = [hashedPW, res.locals.user_id];
   db.query(queryStr, values)
     .then(() => {
       console.log('updated on db')
