@@ -15,6 +15,13 @@ router.post('/signup', userController.createUser, (req, res) => {
 });
 
 // TODO: CONNECT TO FRONTEND
-router.delete('/', userController.deleteUser);
+router.patch('/edit', jwtController.write, userController.updateUser, (req, res) => {
+  return res.status(200).json(res.locals.user)
+})
+
+// TODO: CONNECT TO FRONTEND
+router.delete('/edit', jwtController.write, userController.deleteUser, (req, res) => {
+  return res.status(200).json(true);
+});
 
 module.exports = router;

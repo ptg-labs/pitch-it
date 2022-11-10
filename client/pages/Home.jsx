@@ -66,7 +66,7 @@ const Home = () => {
           )
             ? true
             : false;
-          //TODO: redundant ternary 
+          //TODO: redundant ternary
         });
         return activeFilter;
       });
@@ -112,22 +112,23 @@ const Home = () => {
           setFilteredProjects(arr);
         });
     } catch (err) {
-      alert("couldn't find project");
+      console.log(err);
     }
   };
+
   // On page load, run the asynchronous get request
   useEffect(() => {
     getProjects();
     // populate user
   }, []);
   return (
-    <div id="homepage-div">
-      <div id="Home">Pitches</div>
+    <div id='homepage-div'>
+      <div id='Home'>Pitches</div>
       {/* <div id="Home">Welcome, {localStorage.getItem('username')}</div> */}
       <hr />
-      <div className="homepage-button-container">
+      <div className='homepage-button-container'>
         <button
-          className="filter-button"
+          className='filter-button'
           onClick={() => setFilterPress(!filterPress)}
         >
           Filter
@@ -136,8 +137,8 @@ const Home = () => {
       {/* <div>
         <span id="username"> Hello,  </span>
       </div> */}
-      {filterPress && <div className="filters">{checkboxArr}</div>}
-      <div className="project-card-container">{filteredProjects}</div>
+      {filterPress && <div className='filters'>{checkboxArr}</div>}
+      <div className='project-card-container'>{filteredProjects}</div>
       <br></br>
     </div>
   );
