@@ -58,11 +58,30 @@ userController.createUser = (req, res, next) => {
 };
 
 // TODO: CREATE UPDATE USER MIDDLEWARE
+userController.updateUser = (req, res, next) => {
+  //need a password input from req.body
+  //get res.locals.username from jwt controller - make it be middleware before usercontroller.updateuser
+  const { password } = req.body;
+  const queryStr = 'UPDATE "public.users" SET password=($1) WHERE username=($2)';
+  const values = [password, res.locals.username];
+  db.query(queryStr, values)
+    .then(() => {
+      return next();
+    })
+    .catch((err) => {
+      return next({
+        log: 'Error in userController.updateUser',
+        status: 400,
+        message: { err: err },
+      });
+    });
+};
 
+//change username to req.cookie.jwt;
 userController.deleteUser = (req, res, next) => {
-  const { user_id } = req.body; //user_id is the number of the id. maybe do username and password instead??
-  const queryStr = `DELETE FROM "public.users" WHERE id = ($1)`;
-  const values = [user_id]
+  // const { username } = req.body; //user_id is the number of the id. maybe do username and password instead??
+  const queryStr = `DELETE FROM "public.users" WHERE username=($1)`;
+  const values = [res.locals.username];
   db.query(queryStr, values)
     .then(() => {
       return res.status(200).json(true);
