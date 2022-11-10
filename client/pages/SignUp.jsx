@@ -33,11 +33,12 @@ const SignUp = () => {
   }, []);
   // create a handle submit function
   const handleSubmit = (event) => {
-    // prevent a page referesh
+    // prevent a page refresh
     event.preventDefault();
     // do a check on the input types
     if (!inputData.username || !inputData.password) return setValid(false);
     // Send an asynchronous post request to our server, which should handle logging in
+    //TODO: Add redirect to login page 
     (async function loginUser() {
       try {
         await axios
@@ -48,6 +49,7 @@ const SignUp = () => {
           })
           .then((data) => {
             // pass the specific user's username and user_id to the /home page
+            //redirect you to the login page instead of saving username and user_id
             return navigate('/');
           });
       } catch (err) {

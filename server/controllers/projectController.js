@@ -66,7 +66,7 @@ projectController.getAllProjects = (req, res, next) => {
 
 //get individual users projects
 projectController.getMyProject = (req, res, next) => {
-  const user_id = req.params.id;
+  const user_id = res.locals.user_id;
   // ! For some reason, the project MUST be the second select or else the skill ID will be returned
   const queryStr = `SELECT s.*, pr.* FROM "public.projects_skills_join_table" jt 
   JOIN "public.skills" s ON jt.skill_id = s.id 
@@ -182,7 +182,7 @@ projectController.addProject = (req, res, next) => {
 
 projectController.deleteProject = (req, res, next) => {
   const project_id = req.params.id;
-  const queryStr = `DELETE FROM projects WHERE projects.id = '${project_id}'`;
+  const queryStr = `DELETE FROM "public.projects" WHERE id = '${project_id}'`;
   db.query(queryStr)
     .then(() => {
       res.locals.deleteSuccess = true

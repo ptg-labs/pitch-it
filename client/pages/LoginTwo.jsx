@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import MainContainer from './containers/MainContainer';
 import axios from 'axios';
 import Logo from '../components/Logo.jsx';
 import '../styles/LoginTwo.scss';
-// import SignUp from './SignUp.jsx';
+
 
 /*
   Need for login page:
@@ -44,7 +43,7 @@ const LoginTwo = () => {
   }, []);
   // create a handle submit function
   const handleSubmit = (event) => {
-    // prevent a page referesh
+    // prevent a page refresh
     event.preventDefault();
     // do a check on the input types
     if (!inputData.username || !inputData.password) return setValid(false);

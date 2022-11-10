@@ -9,6 +9,8 @@ jwtController.write = (req, res, next) => {
     res.locals.user.jwt = jwt.sign(
       {
         username: res.locals.user.username, // payload on the jwt is going to be an object with the username in it
+        user_id: res.locals.user.user_id
+
       }, 
       secret, // actual token string
       { expiresIn: '3 hours'} // arbitrarily 3 hours so it doesn't impede dev but we can also make sure it works? idk
@@ -19,10 +21,11 @@ jwtController.write = (req, res, next) => {
 
 jwtController.verify = (req, res, next) => {
   const authHeader = req.headers['authorization'];
+  console.log(authHeader);
   const token = authHeader && authHeader.split(' ')[1].slice(6);
   if (token == null) return res.sendStatus(401);
   try {
-    res.locals.username = jwt.verify(token, secret) // verify returns the payload on the token you are verifying if it passes
+    res.locals.user_id = jwt.verify(token, secret).user_id // verify returns the payload on the token you are verifying if it passes
     return next();
   } catch {
     console.log('jwtController caught error in verify MW');
