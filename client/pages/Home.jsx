@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Project from '../components/Project.jsx';
 import Checkbox from '../components/Checkbox.jsx';
 import axios from 'axios';
-import '../styles/home.scss';
 /* 
   What do we need from Home component?
   Header component
@@ -66,7 +65,7 @@ const Home = () => {
           )
             ? true
             : false;
-          //TODO: redundant ternary 
+          //TODO: redundant ternary
         });
         return activeFilter;
       });
@@ -90,7 +89,9 @@ const Home = () => {
     console.log(document.cookie);
     try {
       await axios // TODO: parse document.cookie for token specifically
-        .get('http://localhost:3000/projects/all', {headers: {'Authorization': `Bearer ${document.cookie}`}})
+        .get('http://localhost:3000/projects/all', {
+          headers: { Authorization: `Bearer ${document.cookie}` },
+        })
         .then((response) => response.data)
         .then((data) => {
           return data.map((obj) => {
@@ -123,13 +124,13 @@ const Home = () => {
     // populate user
   }, []);
   return (
-    <div id="homepage-div">
-      <div id="Home">Pitches</div>
+    <div id='homepage-div'>
+      <div id='Home'>Pitches</div>
       {/* <div id="Home">Welcome, {localStorage.getItem('username')}</div> */}
       <hr />
-      <div className="homepage-button-container">
+      <div className='homepage-button-container'>
         <button
-          className="filter-button"
+          className='filter-button'
           onClick={() => setFilterPress(!filterPress)}
         >
           Filter
@@ -138,8 +139,8 @@ const Home = () => {
       {/* <div>
         <span id="username"> Hello,  </span>
       </div> */}
-      {filterPress && <div className="filters">{checkboxArr}</div>}
-      <div className="project-card-container">{filteredProjects}</div>
+      {filterPress && <div className='filters'>{checkboxArr}</div>}
+      <div className='project-card-container'>{filteredProjects}</div>
       <br></br>
     </div>
   );

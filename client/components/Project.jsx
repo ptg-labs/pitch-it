@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/project-cards.scss';
 /*
   Individual Project Card
 */

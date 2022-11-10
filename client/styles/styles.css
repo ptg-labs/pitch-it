@@ -1,0 +1,69 @@
+:root {
+  --dark-green: #375561;
+  --orange: #fa9687;
+  --mint: #abddd3;
+  --mid-gray: #c3cbcf;
+}
+
+.logo-container {
+  color: var(--dark-green);
+  fill: var(--dark-green);
+}
+
+.login-signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='500' height='900' preserveAspectRatio='none' viewBox='0 0 500 900'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1034%26quot%3b)' fill='none'%3e%3crect width='500' height='900' x='0' y='0' fill='rgba(55%2c 85%2c 97%2c 1)'%3e%3c/rect%3e%3cpath d='M 0%2c419 C 50%2c347 150%2c58.6 250%2c59 C 350%2c59.4 450%2c348.6 500%2c421L500 900L0 900z' fill='rgba(171%2c 221%2c 211%2c 1)'%3e%3c/path%3e%3cpath d='M 0%2c762 C 50%2c705.4 150%2c492 250%2c479 C 350%2c466 450%2c653.4 500%2c697L500 900L0 900z' fill='rgba(250%2c 150%2c 135%2c 1)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1034'%3e%3crect width='500' height='900' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+  height: 100vh;
+  width: 100vw;
+}
+
+section.container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  width: 70vw;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px #00000052;
+}
+
+.login-signup h1 {
+  text-align: center;
+  margin: 20px 0;
+  color: var(--dark-green);
+}
+
+.login-signup input {
+  width: 100%;
+  margin: 10px 0;
+  height: 30px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: var(--mid-gray);
+}
+
+.login-signup input::placeholder {
+  color: var(--dark-green);
+}
+
+.login-signup button {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--orange);
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.login-signup a {
+  color: var(--dark-green);
+  text-decoration: none;
+  font-weight: 700;
+}

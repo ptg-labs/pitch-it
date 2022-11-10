@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from '../styles/settings.scss';
 import e from 'cors';
 
 export default function Settings() {
@@ -16,11 +15,14 @@ export default function Settings() {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get('http://localhost:3000/user/settings', {headers: {'Authorization': `Bearer ${document.cookie}`}})
-    .then((data) => {
-      console.log('data from get /user', data);
-      setUsername(data.username);
-    });
+    axios
+      .get('http://localhost:3000/user/settings', {
+        headers: { Authorization: `Bearer ${document.cookie}` },
+      })
+      .then((data) => {
+        console.log('data from get /user', data);
+        setUsername(data.username);
+      });
   }, []);
 
   const toggleModal = () => {
@@ -34,10 +36,14 @@ export default function Settings() {
   // TODO: CREATE deleteAccount function
   const deleteAccount = () => {
     console.log('deleting account');
-    axios.delete('http://localhost:3000/user/settings', {headers: {'Authorization': `Bearer ${document.cookie}`}}).then(() => {
-      console.log('acct deleted');
-      navigate('/signup');
-    });
+    axios
+      .delete('http://localhost:3000/user/settings', {
+        headers: { Authorization: `Bearer ${document.cookie}` },
+      })
+      .then(() => {
+        console.log('acct deleted');
+        navigate('/signup');
+      });
   };
   const updatePassword = (e) => {
     e.preventDefault();
@@ -46,9 +52,13 @@ export default function Settings() {
       setPasswordsMatch(false);
     } else {
       axios
-        .post('http://localhost:3000/user/settings', { username: userName, password: newPassword }, {headers: {'Authorization': `Bearer ${document.cookie}`}})
+        .post(
+          'http://localhost:3000/user/settings',
+          { username: userName, password: newPassword },
+          { headers: { Authorization: `Bearer ${document.cookie}` } }
+        )
         .then((res) => {
-          console.log(res)
+          console.log(res);
           window.alert('Password updated successfully');
         })
         .catch((err) => console.log(err));

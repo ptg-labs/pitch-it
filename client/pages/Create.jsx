@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Checkbox from '../components/Checkbox.jsx';
-import '../styles/create.scss';
 
 /*
   Create button needs:
@@ -103,7 +102,8 @@ const Create = () => {
       try {
         const postProjectStatus = await axios.post(
           'http://localhost:3000/projects/',
-          inputData, {headers: {'Authorization': `Bearer ${document.cookie}`}}
+          inputData,
+          { headers: { Authorization: `Bearer ${document.cookie}` } }
         );
         if (postProjectStatus) {
           setDuplicate(false);
