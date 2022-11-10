@@ -13,7 +13,7 @@ jwtController.write = (req, res, next) => {
       secret, // actual token string
       { expiresIn: '3 hours'} // arbitrarily 3 hours so it doesn't impede dev but we can also make sure it works? idk
       );
-      res.cookie('jwt', res.locals.jwt, { httpOnly: true }); // send the signed token back in the response as a cookie
+      res.cookie('jwt', res.locals.user.jwt, { httpOnly: true }); // send the signed token back in the response as a cookie
       return next();
   },
 
