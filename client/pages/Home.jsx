@@ -93,6 +93,9 @@ const Home = () => {
         .then((response) => response.data)
         .then((data) => {
           return data.map((obj) => {
+            const dateObj = new Date(Date.parse(obj.created_at));
+            const created_at = dateObj.toDateString();
+            console.log('created_at', created_at);
             return (
               <Project
                 key={obj.id.toString()}
@@ -101,7 +104,7 @@ const Home = () => {
                 title={obj.project_name}
                 description={obj.description}
                 skills={obj.skills}
-                date={obj.date}
+                date={created_at}
               />
             );
           });

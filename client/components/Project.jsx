@@ -4,21 +4,25 @@ import '../styles/project-cards.scss';
   Individual Project Card
 */
 
-const Project = ({
-  owner_name,
-  project_id,
-  title,
-  description,
-  skills,
-  date,
-  handleDelete,
-}) => {
+const Project = (props) => {
+  const {
+    owner_name,
+    project_id,
+    title,
+    description,
+    skills,
+    date,
+    isOwner,
+    handleDelete,
+    handleUpdate,
+    toggleEditor,
+  } = props;
   return (
     <div
       id={`project-${project_id}`}
-      className="project-card"
+      className='project-card'
     >
-      <div className="title">
+      <div className='title'>
         <b style={{ backgroundColor: 'inherit' }}>{title}</b>
       </div>
       <hr />
@@ -36,18 +40,12 @@ const Project = ({
         <b style={{ backgroundColor: 'inherit' }}>Date: </b>
         {date}
       </div>
-      {/* Conditionally render in the delete button*/}
-      {/* Maybe even stretch this functionality to trigger if an edit button is clicked? */}
-      {handleDelete && (
-        // TODO: MAKE THIS BUTTON NOT UGLY AF
-        <button
-          className="delete-button"
-          onClick={() => {
-            handleDelete(project_id);
-          }}
-        >
-          X
-        </button>
+      {/* 
+      isOwner is only true on MyProjects page
+      toggleEditor will populate the editor with the clicked project's data
+       */}
+      {isOwner && (
+        <button onClick={() => toggleEditor(props)}>Edit Project</button>
       )}
     </div>
   );
