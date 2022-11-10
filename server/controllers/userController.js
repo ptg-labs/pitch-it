@@ -70,8 +70,8 @@ userController.createUser = (req, res, next) => {
 userController.updateUser = (req, res, next) => {
   //need a password input from req.body
   //get res.locals.username from jwt controller - make it be middleware before usercontroller.updateuser
-  const queryStr = `UPDATE "public.users" SET password= ($1) WHERE username= ($2)`;
-  const values = [req.body.password, res.locals.username.username];
+  const queryStr = `UPDATE "public.users" SET password= ($1) WHERE id= ($2)`;
+  const values = [req.body.password, res.locals.user_id];
   db.query(queryStr, values)
     .then(() => {
       console.log('updated on db')
@@ -89,8 +89,8 @@ userController.updateUser = (req, res, next) => {
 // //change username to req.cookie.jwt;
 userController.deleteUser = (req, res, next) => {
   // const { username } = req.body; //user_id is the number of the id. maybe do username and password instead??
-  const queryStr = `DELETE FROM "public.users" WHERE username=($1)`;
-  const values = [res.locals.username.username];
+  const queryStr = `DELETE FROM "public.users" WHERE id=($1)`;
+  const values = [res.locals.user_id];
   db.query(queryStr, values)
     .then(() => {
       console.log('account deleted')
