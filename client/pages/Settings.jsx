@@ -61,7 +61,8 @@ export default function Settings() {
     }));
   };
   return (
-    <section id='settings'>
+    <section id='settings-div'>
+    <h1 className='settings-header'>Settings</h1>
       {/* MODAL */}
       {modalIsOpen && (
         <div className='modal'>
@@ -85,22 +86,22 @@ export default function Settings() {
               required
             />
             {passwordsMatch || <div>Passwords do not match</div>}
-            <button>Submit</button>
+            <button class='modal-button'>Submit</button>
           </form>
         </div>
       )}
       {/* PAGE */}
-      <div>
-        <h1>Settings</h1>
-        <button onClick={toggleModal}>Change Password</button>
-        <button onClick={toggleConfirmation}>Delete Account</button>
+      <div className = 'modal2'>
+        {/* <h1>Settings</h1> */}
+        <button class='modal-button' onClick={toggleModal}>Change Password</button>
+        <button class='modal-button' onClick={toggleConfirmation}>Delete Account</button>
         {confirmationVisible && (
           <div>
             <div>Are you sure?</div>
 
             <div>
-              <button onClick={deleteAccount}>Yes, delete my account</button>
-              <button onClick={toggleConfirmation}>Cancel</button>
+              <button class='modal-button' onClick={deleteAccount}>Yes, delete my account</button>
+              <button class='modal-button' onClick={toggleConfirmation}>Cancel</button>
             </div>
           </div>
         )}
