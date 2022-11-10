@@ -6,7 +6,7 @@ const secret = process.env.TOKEN_SECRET;
 const jwtController = {}
 
 jwtController.write = (req, res, next) => {
-    res.locals.jwt = jwt.sign(
+    res.locals.user.jwt = jwt.sign(
       {
         username: res.locals.user.username, // payload on the jwt is going to be an object with the username in it
       }, 
@@ -20,7 +20,6 @@ jwtController.write = (req, res, next) => {
 jwtController.verify = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1].slice(6);
-  console.log(token);
   if (token == null) return res.sendStatus(401);
   try {
     res.locals.username = jwt.verify(token, secret) // verify returns the payload on the token you are verifying if it passes
