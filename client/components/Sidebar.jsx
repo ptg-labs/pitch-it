@@ -7,48 +7,43 @@ import Logo from './Logo.jsx';
 const Sidebar = () => {
   return (
     // Everything in a certain side
-    <aside className='aside'>
-      <div className='aside-wrapper'>
-        <Link
-          to={'/home'}
-          id='logo-section'
-        >
-          {/* <img src={logo} alt="art"/> */}
-          <span
-            id='logo'
+    <aside>
+      <ul className='side-link'>
+        <li>
+          <Link
+            to={'/home'}
+            id='logo-section'
+          >
+            Home
+          </Link>
+        </li>
+        <li key={1}>
+          <Link
+            to={'/myprojects'}
             className='navbuttons'
           >
-            <Logo />
-          </span>
-        </Link>
-        <ul className='side-link'>
-          <li key={1}>
-            <Link
-              to={'/myprojects'}
-              className='navbuttons'
-            >
-              My Pitches
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={'/Favorites'}
-              className='navbuttons'
-            >
-              Favorites
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={'/Settings'}
-              className='navbuttons'
-            >
-              Settings
-            </Link>
-          </li>
-          {}
-        </ul>
-      </div>
+            My <br />
+            Pitches
+          </Link>
+        </li>
+        <li>
+          <Link
+            to={'/Favorites'}
+            className='navbuttons'
+          >
+            Favorites
+          </Link>
+        </li>
+        <li>
+          <Link
+            to={'/Settings'}
+            className='navbuttons'
+          >
+            Settings
+          </Link>
+        </li>
+        {}
+      </ul>
     </aside>
   );
 };
