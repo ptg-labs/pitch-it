@@ -14,8 +14,10 @@ projectController.getAllProjects = (req, res, next) => {
   // Original Query Str
   // const queryStr = `SELECT * FROM projects`;
   // Join table Query Str
-  const queryStr = `SELECT s.*, pr.* FROM "public.projects_skills_join_table" jt 
-  JOIN "public.projects" pr ON jt.project_id = pr.id JOIN "public.skills" s ON jt.skill_id = s.id`;
+  const queryStr = `SELECT s.*, pr.*, u.username FROM "public.projects" pr
+  JOIN "public.projects_skills_join_table" psjt ON psjt.project_id = pr.id
+  JOIN "public.skills" s ON psjt.skill_id = s.id
+  JOIN "public.users" u ON pr.owner_id = u.id`;
   db.query(queryStr)
     .then((data) => {
       return data.rows;
