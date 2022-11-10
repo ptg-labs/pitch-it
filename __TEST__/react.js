@@ -24,8 +24,8 @@ describe('Unit testing React Components', () => {
             const { container } = render(<Logo />);
             const svgEl = container.getById("svgMain");
             expect(svgEl.classList.toString().toContain("svg-logo"));
-        })
-    })
+        });
+    });
     // if SideBarLayout includes the Sidebar component
     describe('SidebarLayout', () => {
         test('Sidebar renders', () => {
@@ -36,33 +36,33 @@ describe('Unit testing React Components', () => {
             expect(result.props.children).toEqual([
                 <Sidebar />
             ]);
-        })
-    })
+        });
+    });
     // if sidebar has 3 elements with className navbuttons
     describe('Sidebar', () => {
         test('links render', () => {
             const wrapper = mount(<Sidebar />);
             expect(wrapper.find('.navbuttons').toHaveLength(3));
-        })
-    })
+        });
+    });
     // if main container holds the 3 routes and they work
     describe('MainContainer', () => {
         test('links route correctly', async () => {
-            const history = createMemoryHistory()
+            const history = createMemoryHistory();
             render(
                 <Router history={history}>
                     <MainContainer />
                 </Router>,
-            )
-            const user = userEvent.setup()
-            expect(screen.getByText(/You are on the MyProjects page/i).toBeInTheDocument())
-            await user.click(screen.getByText(/home/i))
-            expect(screen.getByText(/You are home/i).toBeInTheDocument())
-            await user.click(screen.getByText(/MyProjects/i))
-            expect(screen.getByText(/Project page/i).toBeInTheDocument())
-            await user.click(screen.getByText(/create/i))
-        })
-    })
+            );
+            const user = userEvent.setup();
+            expect(screen.getByText(/You are on the MyProjects page/i).toBeInTheDocument());
+            await user.click(screen.getByText(/home/i));
+            expect(screen.getByText(/You are home/i).toBeInTheDocument());
+            await user.click(screen.getByText(/MyProjects/i));
+            expect(screen.getByText(/Project page/i).toBeInTheDocument());
+            await user.click(screen.getByText(/create/i));
+        });
+    });
     describe('Checkbox', () => {
         test('buttons populate with correct color', () => {
             // if button exists on page
@@ -70,15 +70,15 @@ describe('Unit testing React Components', () => {
             // color of button on render
             expect(screen.getAllByClass('skill-button')).toHaveStyle({ backgroundColor: 'rgb(87, 82, 212)' });
 
-        })
+        });
         test('buttons change color and state on click', () => {
             render(<Checkbox />);
             const button = screen.getByText(/skill/i);
             fireEvent.click(button);
             // if on click the color changes
             expect(screen.getAllByClass('skill-button')).toHaveStyle({ backgroundColor: '#b6b7cb' });
-        })
-    })
+        });
+    });
     describe('Project', () => {
         let project;
         const props = {
@@ -103,11 +103,11 @@ describe('Unit testing React Components', () => {
             expect(project.getByText({ title }).nextSibling).toHaveTextContent(title);
             expect(project.getByText('Date:').nextSibling).toHaveTextContent(date);
 
-        })
+        });
         test('The functions passed down should be invoked on click', () => {
             const button = screen.getAllByClass('.delete-button');
             fireEvent.click(button);
             expect(handleDelete).toHaveBeenCalled();
-        })
-    })
-})
+        });
+    });
+});

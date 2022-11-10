@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import Fade from 'react-reveal/Fade';
 
+// error page for if client url is not accessible
 const Error = () => {
   return (
     <div className='section__errorpage section__padding'>

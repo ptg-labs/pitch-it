@@ -4,21 +4,11 @@ import { Link, NavLink } from 'react-router-dom';
 import Project from '../components/Project.jsx';
 import '../styles/myprojects.scss';
 
-/* 
-  MyProjects needs:
-  Header
-  Sidebar
-  Project cards -> only ones you have made
-  
-*/
-// ! Do we want Login to be its own page?
-
 const MyProjects = () => {
-  // this is used to populate my projects
+  // populates myProjects
   const [myProjects, setMyProjects] = useState([]);
-  // const [ranOnce, setRanOnce] = useState(false);
   const [formData, setFormData] = useState();
-  // Send a get request to the server on page load to pull in all my projects
+  // sends a GET request to the server on page load to pull in all myProjects
   const getMyProjects = async () => {
     try {
       const myProjects = await axios.get(
@@ -67,7 +57,7 @@ const MyProjects = () => {
   const toggleEditor = () => {
     console.log('toggling editor');
   };
-  // TODO: FIGURE OUT LESS HACKY WAY TO AVOID INFINITE LOOP
+  // TODO: figure out different way to avoid infinite loops
   // useEffect(() => {
   //   if (!ranOnce) {
   //     getMyProjects();
@@ -86,7 +76,6 @@ const MyProjects = () => {
   return (
     <div id='myprojects-div'>
       {/* editor modal */}
-
       {/* page */}
       <div className='myproject-header'>My Pitches</div>
       <hr />

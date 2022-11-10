@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Routes, Route, Links } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
 
+// The below is utilized for testing purposes
 const MyProjects = () => <div>You are on the MyProjects page</div>
 const Home = () => <div>You are home</div>
 const Create = () => <div>Project page</div>
@@ -11,12 +12,9 @@ export const LocationDisplay = () => {
 
   return <div data-testid="location-display">{location.pathname}</div>
 }
+// end of testing
 
-/*
-  Where do we need to hang Main Container from?
- */
-
-// ONLY USE ROUTES
+// use React Router to route to different pages
 const MainContainer = () => {
   return (
     <BrowserRouter>
