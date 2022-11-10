@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import styles from '../styles/settings.scss';
 import e from 'cors';
 
@@ -13,6 +14,7 @@ export default function Settings() {
     confirmPassword: '',
   });
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const navigate = useNavigate();
   useEffect(() => {
     axios.get('http://localhost:3000/user').then(({ data }) => {
       console.log('data from get /user', data);
@@ -30,6 +32,10 @@ export default function Settings() {
   // TODO: CREATE deleteAccount function
   const deleteAccount = () => {
     console.log('deleting account');
+    axios.delete('http://localhost:3000/user').then(() => {
+      console.log('acct deleted');
+      navigate('/signup');
+    });
   };
   const updatePassword = (e) => {
     e.preventDefault();
@@ -57,6 +63,7 @@ export default function Settings() {
       {/* MODAL */}
       {modalIsOpen && (
         <div className='modal'>
+          {/* TODO: ADD ABILITY TO UPDATE USERNAME */}
           <form onSubmit={updatePassword}>
             <label htmlFor='new-password'>Enter a new password</label>
             <input
