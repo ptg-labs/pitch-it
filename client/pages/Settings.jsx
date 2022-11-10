@@ -16,14 +16,13 @@ export default function Settings() {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.patch('http://localhost:3000/user/settings').then((resp) => {
-      console.log('data from get /user', resp);
-      // setUsername(data.username);
+    axios.get('http://localhost:3000/user/settings', {headers: {'Authorization': `Bearer ${document.cookie}`}})
+    .then((data) => {
+      console.log('data from get /user', data);
+      setUsername(data.username);
     });
   }, []);
 
-  const username = localStorage.getItem(username);
-  console.log(username);
   const toggleModal = () => {
     setModalIsOpen((prevState) => !prevState);
     setPasswordsMatch(true);
@@ -35,7 +34,7 @@ export default function Settings() {
   // TODO: CREATE deleteAccount function
   const deleteAccount = () => {
     console.log('deleting account');
-    axios.delete('http://localhost:3000/user/settings').then(() => {
+    axios.delete('http://localhost:3000/user/settings', {headers: {'Authorization': `Bearer ${document.cookie}`}}).then(() => {
       console.log('acct deleted');
       navigate('/signup');
     });
@@ -47,8 +46,9 @@ export default function Settings() {
       setPasswordsMatch(false);
     } else {
       axios
-        .post('http://localhost:3000/user', { password: newPassword })
+        .post('http://localhost:3000/user/settings', { username: userName, password: newPassword }, {headers: {'Authorization': `Bearer ${document.cookie}`}})
         .then((res) => {
+          console.log(res)
           window.alert('Password updated successfully');
         })
         .catch((err) => console.log(err));

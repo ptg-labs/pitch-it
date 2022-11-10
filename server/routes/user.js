@@ -15,17 +15,16 @@ router.post('/signup', userController.createUser, (req, res) => {
   return res.status(200).json(true);
 });
 
-// router.get('/settings', userController.verifyUser, jwtController.verify, (req, res) => {
-//   return res.status(200).json(res.locals.username);
-// })
+router.get('/settings', jwtController.verify, (req, res) => {
+  return res.status(200).json(res.locals.username);
+});
+
+router.post('/settings', jwtController.verify, userController.updateUser, (req, res) => {
+  return res.status(200).json(true);
+});
 
 // TODO: CONNECT TO FRONTEND
-router.patch('/settings', userController.updateUser, (req, res) => {
-  return res.status(200).json(res.locals.user)
-})
-
-// TODO: CONNECT TO FRONTEND
-router.delete('/settings', jwtController.write, userController.deleteUser, (req, res) => {
+router.delete('/settings', jwtController.verify, userController.deleteUser, (req, res) => {
   return res.status(200).json(true);
 });
 
