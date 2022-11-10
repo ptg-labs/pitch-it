@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 // TODO: Lift state out of the checkboxes (have the state in the parent component)
-//Checkbox is a list of buttons that render all the skills and change the state when they are clicked
+// checkbox is a list of buttons that render all the skills and change the state when they are clicked
 const Checkbox = ({ skill, handleClick, type }) => {
-  // TODO: double check if type is necessary 
+  // TODO: check if type is necessary 
   const [toggle, setToggle] = useState(false);
+  // toggle will alter state back and forth and change color
   const handleToggle = () => {
     setToggle(!toggle);
   };

@@ -5,7 +5,7 @@ import styles from '../styles/settings.scss';
 import e from 'cors';
 
 export default function Settings() {
-  // fetch and set username on componentDidMount equivalent
+  
   const [userName, setUsername] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [confirmationVisible, setConfirmationVisible] = useState(false);
@@ -15,10 +15,10 @@ export default function Settings() {
   });
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const navigate = useNavigate();
+  // fetch and set username on componentDidMount equivalent
   useEffect(() => {
     axios.get('http://localhost:3000/user/settings', {headers: {'Authorization': `Bearer ${document.cookie}`}})
     .then((data) => {
-      console.log('data from get /user', data);
       setUsername(data.username);
     });
   }, []);
@@ -31,7 +31,6 @@ export default function Settings() {
     console.log('toggling confirmation');
     setConfirmationVisible((prevState) => !prevState);
   };
-  // TODO: CREATE deleteAccount function
   const deleteAccount = () => {
     console.log('deleting account');
     axios.delete('http://localhost:3000/user/settings', {headers: {'Authorization': `Bearer ${document.cookie}`}}).then(() => {
@@ -66,7 +65,6 @@ export default function Settings() {
       {/* MODAL */}
       {modalIsOpen && (
         <div className='modal'>
-          {/* TODO: ADD ABILITY TO UPDATE USERNAME */}
           <form onSubmit={updatePassword}>
             <label htmlFor='new-password'>Enter a new password</label>
             <input

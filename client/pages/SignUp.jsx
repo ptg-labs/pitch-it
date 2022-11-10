@@ -1,25 +1,24 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import MainContainer from './containers/MainContainer';
 import axios from 'axios';
 import Logo from '../components/Logo.jsx';
 import '../styles/signup.scss';
+
 const SignUp = () => {
-  // We want multiple hooks here
-  // This hook will change state if the user's input is invalid
+  // will change state if the user's input is invalid
   const [valid, setValid] = useState(true);
-  // This hook will change our password's type to password
+  // will change our password's type to password
   const [hide, setHide] = useState(true);
-  // Create a hook that handles input changes for either username or password
+  // handles input changes for either username or password
   const initialInputState = {
     username: '',
     password: '',
   };
-  // we want to useNavigate as a side effect of successful login
+  // useNavigate is a side effect of successful login
   const navigate = useNavigate();
   const hidePW = () => setHide((prevState) => !prevState);
-  // This hook will change state depending on the user's inputs
+  // will change state depending on the user's inputs
   const [inputData, setInputData] = useState(initialInputState);
   // create a handle input change function
   const handleInputChange = (e, inputId) => {
@@ -35,10 +34,9 @@ const SignUp = () => {
   const handleSubmit = (event) => {
     // prevent a page refresh
     event.preventDefault();
-    // do a check on the input types
+    // checks the input types
     if (!inputData.username || !inputData.password) return setValid(false);
-    // Send an asynchronous post request to our server, which should handle logging in
-    //TODO: Add redirect to login page 
+    // send an asynchronous POST request to the server, which should handle logging in
     (async function loginUser() {
       try {
         await axios

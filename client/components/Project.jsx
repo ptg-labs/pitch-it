@@ -1,8 +1,7 @@
 import React from 'react';
 import '../styles/project-cards.scss';
-/*
-  Individual Project Card
-*/
+
+// individual project cards that render on MyProjects and Home page
 
 const Project = (props) => {
   const {
@@ -17,6 +16,7 @@ const Project = (props) => {
     handleUpdate,
     toggleEditor,
   } = props;
+  
   return (
     <div
       id={`project-${project_id}`}

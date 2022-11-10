@@ -118,7 +118,7 @@ projectController.getMyProject = (req, res, next) => {
     });
 };
 
-// ! WTF? -- unfinished, unused
+//unfinished, unused
 projectController.getProject = (req, res, next) => {
   const { project } = req.body;
   const queryStr = ``;
@@ -143,6 +143,7 @@ projectController.getProject = (req, res, next) => {
     });
 };
 
+//add a new project into user's own projects
 projectController.addProject = (req, res, next) => {
   const { owner_id, project_name, description, skills } = req.body;
   console.log(req.body.skills);

@@ -3,13 +3,6 @@ import Project from '../components/Project.jsx';
 import Checkbox from '../components/Checkbox.jsx';
 import axios from 'axios';
 import '../styles/home.scss';
-/* 
-  What do we need from Home component?
-  Header component
-  Sidebar component
-  Filter button (dropdown)
-  Project Card components
-*/
 
 const Home = () => {
   // this object contains all the skills and initializes their clickState to false
@@ -36,7 +29,7 @@ const Home = () => {
     'Unreal Engine': false,
     'Spring Boot': false,
   };
-  // we could just throw this in a variable defined in the global scope but it's fine at this point
+  // this will hold the array of projects to be viewed
   const [projectArr, setProjectArr] = useState([]);
   // this is going to contain the filtered state
   const [filteredProjects, setFilteredProjects] = useState([]);
@@ -46,18 +39,18 @@ const Home = () => {
   const [skillState, setSkillState] = useState(skillsObj);
   // this handle click fires whenever a skill is selected
   const handleClick = (skill) => {
-    // first we change the state of the selected skill
+    // first change the state of the selected skill
     setSkillState((prevState) => {
       // update the previous state's skills
       const updatedSkills = {
         ...prevState,
         [skill]: !prevState[skill],
       };
-      // pick out only the truthy/active skills and create a new array from them
-      const activeSkills = Object.entries(updatedSkills) // array that looks like [[key, value], ...]
-        .filter((skill) => skill[1]) // returning a filtered array of skills that are set to true
-        .map((skill) => skill[0]); // returning an array of the names of the skills from above
-      // set a filtered Projects state, projectArr is a redundancy so that the filter never returns an empty page with nothing
+      // pick out only the truthy/active skills and create a new array from them, [[key, value], ...]
+      const activeSkills = Object.entries(updatedSkills)
+        .filter((skill) => skill[1]) // returns a filtered array of skills that are set to true
+        .map((skill) => skill[0]); // returns an array of the names of the skills from above
+      // set a filtered projects state, projectArr is a redundancy so the filter never returns an empty page
       setFilteredProjects((prevState) => {
         console.log(projectArr);
         const activeFilter = projectArr.filter((project) => {
@@ -66,7 +59,7 @@ const Home = () => {
           )
             ? true
             : false;
-          //TODO: redundant ternary 
+          //TODO: remove redundant ternary above
         });
         return activeFilter;
       });
@@ -85,11 +78,12 @@ const Home = () => {
       />
     );
   }
-  // Send a get request to the server on page load to pull in all projects in our DB
+  // send a get request to the server on page load to pull in all projects in the DB
   const getProjects = async () => {
     console.log(document.cookie);
+    // TODO: parse document.cookie for token specifically
     try {
-      await axios // TODO: parse document.cookie for token specifically
+      await axios 
         .get('http://localhost:3000/projects/all', {headers: {'Authorization': `Bearer ${document.cookie}`}})
         .then((response) => response.data)
         .then((data) => {
@@ -117,15 +111,14 @@ const Home = () => {
       alert("couldn't find project");
     }
   };
-  // On page load, run the asynchronous get request
+  // On page load, run the asynchronous GET request
   useEffect(() => {
     getProjects();
-    // populate user
+    // populate correct user
   }, []);
   return (
     <div id="homepage-div">
       <div id="Home">Pitches</div>
-      {/* <div id="Home">Welcome, {localStorage.getItem('username')}</div> */}
       <hr />
       <div className="homepage-button-container">
         <button
@@ -135,9 +128,6 @@ const Home = () => {
           Filter
         </button>
       </div>
-      {/* <div>
-        <span id="username"> Hello,  </span>
-      </div> */}
       {filterPress && <div className="filters">{checkboxArr}</div>}
       <div className="project-card-container">{filteredProjects}</div>
       <br></br>

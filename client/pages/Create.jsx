@@ -4,18 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import Checkbox from '../components/Checkbox.jsx';
 import '../styles/create.scss';
 
-/*
-  Create button needs:
-  onClick reroute, OR modal popup
-  Project name -> submit field
-  Description -> submit field
-  Skills needed -> prepopulated skills
-  Time stamp -> Date.now
-*/
 
 const Create = () => {
-  // this object contains all the skills and initializes their clickState to false
-  // TODO: STASH skillsObj IN A SEPARATE AND IMPORT WHERE NEEDED
+  // skillsObj contains all the skills and initializes their clickState to false
+  // TODO: Stash skillsObj in a separate file and import as needed
   const skillsObj = {
     React: false,
     Express: false,
@@ -47,6 +39,7 @@ const Create = () => {
       [skill]: !prevState[skill],
     }));
   };
+  // add checkboxes to  an array 
   const checkboxArr = [];
   for (const skill in skillState) {
     skillState[skill];
@@ -59,7 +52,7 @@ const Create = () => {
         clicked={skillState[skill]}
       />
     );
-  }
+  };
   const defaultInput = {
     project_name: '',
     description: '',
@@ -76,17 +69,17 @@ const Create = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Populate inputData with required fields
+    // populate inputData with required fields
     const filteredSkills = [];
-    // We are going to push the index of the truthy skills into an array, which we will send in a request to our backend
+    // push the index of the truthy skills into an array, then send in a request to the backend
     for (const skill in skillState) {
-      // If we read a truthy value in our skillState object
+      // if there is a truthy value in the skillState object
       if (skillState[skill])
         // push the index to the filteredSkills array
-        // SQL indicies start at 1 so we should add 1 to each value
+        // SQL indicies start at 1 so add 1 to each value
         filteredSkills.push(Object.keys(skillsObj).indexOf(skill) + 2);
     }
-    // TODO: don't mutate state directly
+    // TODO: do not mutate state directly
     const date = new Date();
     inputData.date = date.toDateString();
     inputData.owner_id = 2;
@@ -98,7 +91,7 @@ const Create = () => {
       !inputData.skills.length
     )
       return setValid(false);
-    // Send an asynchronous post request to our server
+    // send an asynchronous POST request to the server
     (async function postProject() {
       try {
         const postProjectStatus = await axios.post(
@@ -112,12 +105,13 @@ const Create = () => {
           return navigate('/myprojects');
         }
       } catch (err) {
-        // TODO: FIX ERROR HANDLER TO NOT SET DUPLICATE FOR ANY ERROR
+        // TODO: adjust error handler to not set duplicate for any error
         console.log('catch block');
         setDuplicate(true);
       }
     })();
   };
+  // create a template for user to fill in data about their project
   return (
     <div className='project-card-layout'>
       <form
@@ -164,17 +158,9 @@ const Create = () => {
         </div>
         <div className='field'>
           <label>Needed Skills:</label>
-          {/* <input
-            type='text'
-            id='skillsets-needed'
-            name='skillsets-needed'
-            value={inputData.skillset}
-            placeholder='Enter a description of the Teammates you would like to find!'
-            onChange={(e) => handleInputChange(e, 'skillset')}
-          /> */}
           <div className='filters'>{checkboxArr}</div>
         </div>
-        {/* TODO: FIX PROJECT SUBMISSION HANDLER (BACKEND?) */}
+        {/* TODO: fix project submission handler(backend) */}
         <button
           id='create-button'
           type='submit'
