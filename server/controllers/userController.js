@@ -1,5 +1,5 @@
 const db = require('../models/projectModels');
-
+const bcrypt = require('bcryptjs');
 const userController = {};
 
 // userController.getAllUsers = (req, res, next) => {
@@ -13,22 +13,27 @@ const userController = {};
 //     return next({});
 //   }
 // };
-// TODO: IMPLEMENT PROPER AUTH
+// TODO: IMPLEMENT PROPER AUTH - needs testing now
 userController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
-  const queryStr = 'SELECT "id", "username" FROM "public.users" WHERE username= ($1) AND password= ($2)';
+  const queryStr = 'SELECT "id", "username", "password" FROM "public.users" WHERE username= ($1) AND password= ($2)';
   const values = [username, password];
   db.query(queryStr, values)
     .then((data) => {
       console.log(data.rows[0]);
       return data.rows[0];
     })
-    .then((user) => {
+    .then(async (user) => {
       // If our query returns null, just send back false to our front end
-      // TODO: put data in res.locals, not the response here
       if (!user) throw new Error("User not found"); // used to send back falsy but I don't see why we don't just throw error
-      res.locals.user = { user_id: user.id, username: user.username };
-      return next();
+      // TODO: figure out how bcrypt compare can work in this middleware. seems to always return false no matter what here
+      // console.log(user.password + password);
+      // const valid = await bcrypt.compare(password, user.password) 
+      // console.log("valid: ", valid);
+      // if (valid) {
+        res.locals.user = { user_id: user.id, username: user.username };
+        return next();
+      // } else throw new Error("Password does not match");
     })
     .catch((err) => {
       return next({
@@ -39,9 +44,13 @@ userController.verifyUser = (req, res, next) => {
     });
 };
 
+const SALT_WORK_FACTOR = 10;
+
 // ! Think about what if user already exists
 userController.createUser = (req, res, next) => {
   const { username, password } = req.body;
+
+  // const hashedPW = bcrypt.hashSync(password, 10); // commented until bcrypt compare works
   const queryStr = `INSERT INTO "public.users" (username, password) VALUES ($1, $2)`;
   const values = [username, password];
   db.query(queryStr, values)
