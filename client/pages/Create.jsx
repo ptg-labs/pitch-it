@@ -103,7 +103,7 @@ const Create = () => {
       try {
         const postProjectStatus = await axios.post(
           'http://localhost:3000/projects/',
-          inputData
+          inputData, {headers: {'Authorization': `Bearer ${document.cookie}`}}
         );
         if (postProjectStatus) {
           setDuplicate(false);

@@ -51,8 +51,9 @@ projectController.getAllProjects = (req, res, next) => {
         return true;
       });
       // If our query returns null, just send back false to our front end
-      if (!projects) return res.status(400).json(false);
-      return res.status(200).json(mergedProjects);
+      if (!projects) throw new Error('No projects!')
+      res.locals.mergedProjects = mergedProjects;
+      return next();
     })
     .catch((err) => {
       return next({
@@ -104,8 +105,9 @@ projectController.getMyProject = (req, res, next) => {
         return true;
       });
       // If our query returns null, just send back false to our front end
-      if (!projects) return res.status(400).json(false);
-      return res.status(200).json(mergedProjects);
+      if (!projects) return res.status(400).json(false); // does this have to be false?
+      res.locals.mergedProjects = mergedProjects;
+      return next();
     })
     .catch((err) => {
       return next({
@@ -183,7 +185,8 @@ projectController.deleteProject = (req, res, next) => {
   const queryStr = `DELETE FROM projects WHERE projects.id = '${project_id}'`;
   db.query(queryStr)
     .then(() => {
-      return res.status(200).json(true);
+      res.locals.deleteSuccess = true
+      return next();
     })
     .catch((err) => {
       return next({
