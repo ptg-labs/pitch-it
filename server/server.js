@@ -6,6 +6,7 @@ const path = require('path');
 const cors = require('cors');
 const userRouter = require('./routes/user');
 const projRouter = require('./routes/projects');
+const cookieParser = require('cookie-parser');
 const PORT = 3000;
 
 app.use(cors({ origin: true }));
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // });
 
 // All our front end requests to login should be handled in our loginRouter
+app.use(cookieParser());
 app.use('/user', userRouter);
 
 app.use('/projects', projRouter);
