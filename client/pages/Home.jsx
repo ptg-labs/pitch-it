@@ -87,9 +87,10 @@ const Home = () => {
   }
   // Send a get request to the server on page load to pull in all projects in our DB
   const getProjects = async () => {
+    console.log(document.cookie);
     try {
-      await axios
-        .get('http://localhost:3000/projects/all')
+      await axios // TODO: parse document.cookie for token specifically
+        .get('http://localhost:3000/projects/all', {headers: {'Authorization': `Bearer ${document.cookie}`}})
         .then((response) => response.data)
         .then((data) => {
           return data.map((obj) => {

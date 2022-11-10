@@ -5,7 +5,7 @@ const userController = require('../controllers/userController');
 // TODO: REFACTOR MIDDLEWARE TO NOT BE FINAL ENDPOINT HANDLER
 // All requests here are coming in from /user/...
 router.post('/login', userController.verifyUser, jwtController.write, (req, res) => {
-  return res.status(200).json(res.locals.user);
+  return res.status(200).json(res.locals.jwt);
 });
 
 // router.get('/login', userController.getAllUsers)

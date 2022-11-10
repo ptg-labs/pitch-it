@@ -18,9 +18,15 @@ jwtController.write = (req, res, next) => {
   },
 
 jwtController.verify = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1].slice(6);
+  console.log(token);
+  if (token == null) return res.sendStatus(401);
   try {
-    res.locals.username = jwt.verify(req.cookies.jwt, secret) // verify returns the payload on the token you are verifying if it passes
+    res.locals.username = jwt.verify(token, secret) // verify returns the payload on the token you are verifying if it passes
+    return next();
   } catch {
+    console.log('jwtController caught error in verify MW');
     return next({err: 'Verification error - Invalid JWT'});
   }
 }

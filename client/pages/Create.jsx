@@ -52,7 +52,7 @@ const Create = () => {
     skillState[skill];
     checkboxArr.push(
       <Checkbox
-        type="button"
+        type='button'
         key={skill}
         skill={skill}
         handleClick={handleClick}
@@ -84,12 +84,12 @@ const Create = () => {
       if (skillState[skill])
         // push the index to the filteredSkills array
         // SQL indicies start at 1 so we should add 1 to each value
-        filteredSkills.push(Object.keys(skillsObj).indexOf(skill) + 1);
+        filteredSkills.push(Object.keys(skillsObj).indexOf(skill) + 2);
     }
     // TODO: don't mutate state directly
     const date = new Date();
     inputData.date = date.toDateString();
-    inputData.owner_id = localStorage.getItem('user_id');
+    inputData.owner_id = 2;
     inputData.owner_name = localStorage.getItem('username');
     inputData.skills = filteredSkills;
     if (
@@ -119,50 +119,50 @@ const Create = () => {
     })();
   };
   return (
-    <div className="project-card-layout">
+    <div className='project-card-layout'>
       <form
-        id="project-creation-form"
+        id='project-creation-form'
         onSubmit={handleSubmit}
       >
-        <h1 id="create-header">Create Pitch</h1>
+        <h1 id='create-header'>Create Pitch</h1>
         <hr />
         {duplicate && (
           <>
-            <span className="duplicate-error">
+            <span className='duplicate-error'>
               A project with this name already exists.
             </span>
             <br></br>
           </>
         )}
         {!valid && (
-          <span className="input-error">
+          <span className='input-error'>
             Please enter valid project information.
           </span>
         )}
-        <div className="field">
+        <div className='field'>
           <label>Project Title:</label>
           <input
-            type="text"
-            id="project-name"
-            name="project-name"
+            type='text'
+            id='project-name'
+            name='project-name'
             value={inputData.project_name}
-            placeholder="Enter a title for your project"
+            placeholder='Enter a title for your project'
             onChange={(e) => handleInputChange(e, 'project_name')}
           />
         </div>
-        <div className="field">
+        <div className='field'>
           <label>Description:</label>
           <textarea
-            rows="5"
-            type="text"
-            id="project-description"
-            name="project-description"
+            rows='5'
+            type='text'
+            id='project-description'
+            name='project-description'
             value={inputData.description}
-            placeholder="Enter a short description of your project"
+            placeholder='Enter a short description of your project'
             onChange={(e) => handleInputChange(e, 'description')}
           />
         </div>
-        <div className="field">
+        <div className='field'>
           <label>Needed Skills:</label>
           {/* <input
             type='text'
@@ -172,12 +172,12 @@ const Create = () => {
             placeholder='Enter a description of the Teammates you would like to find!'
             onChange={(e) => handleInputChange(e, 'skillset')}
           /> */}
-          <div className="filters">{checkboxArr}</div>
+          <div className='filters'>{checkboxArr}</div>
         </div>
         {/* TODO: FIX PROJECT SUBMISSION HANDLER (BACKEND?) */}
         <button
-          id="create-button"
-          type="submit"
+          id='create-button'
+          type='submit'
         >
           Pitch it!
         </button>

@@ -57,11 +57,12 @@ const LoginTwo = () => {
           .then((response) => {
             setValid(false);
             setInputData(initialInputState);
-            return response.data; // interesting that this isn't just getting parsed
+            return response.data;
           })
           .then((data) => {
-            localStorage.setItem('username', data.username);
-            localStorage.setItem('user_id', data.user_id);
+            document.cookie = `token=${data}`
+            localStorage.setItem('username', inputData.username);
+            localStorage.setItem('user_id', inputData.user_id);
             return navigate('/home');
           });
       } catch (err) {
