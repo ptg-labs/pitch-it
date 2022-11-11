@@ -5,7 +5,14 @@
   --orange: #fa9687;
   --mint: #abddd3;
   --mid-gray: #c3cbcf;
+  --light-gray: #f2f2f2;
   font-family: 'Rubik', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--light-gray);
 }
 
 .logo-container {
@@ -73,14 +80,16 @@ section.container {
 
 aside {
   left: 0;
-  top: calc(100vh - 100px);
+  top: calc(100vh - 110px);
   position: fixed;
   display: flex;
   background-color: white;
   width: 100vw;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  height: 100px;
+  height: 130px;
+  border-radius: 50px;
+  padding-top: 25px;
 }
 
 aside ul {
@@ -110,4 +119,116 @@ li {
 li * {
   color: white;
   text-decoration: none;
+}
+
+#homepage-div {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+#homepage-div div.top {
+  background-color: transparent;
+  height: 50px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--light-gray);
+  padding: 10px 20px;
+  margin-top: -5px;
+}
+
+div.top button {
+  background-color: transparent;
+  border-style: none;
+  color: var(--orange);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+#homepage-div h1 {
+  margin: 10px;
+  padding: 0;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.project-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-card {
+  background-color: white;
+  border-radius: 20px;
+  width: 80%;
+  margin: 20px 0;
+  padding: 10px 20px;
+}
+
+.project-card .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+section#settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  width: 100vw;
+}
+
+#settings > div {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+#settings h1 {
+  text-align: center;
+}
+
+#settings button {
+  background-color: var(--orange);
+  border-style: none;
+  height: 30px;
+  margin: 10px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+}
+
+#settings button.delete {
+  background-color: transparent;
+  color: var(--orange);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal h3 {
+  text-align: center;
+}
+
+button.cancel {
+  background-color: var(--mint) !important;
+  color: var(--light-gray) !important;
 }

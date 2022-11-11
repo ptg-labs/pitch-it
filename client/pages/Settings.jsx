@@ -73,47 +73,61 @@ export default function Settings() {
   };
   return (
     <section id='settings'>
-      {/* MODAL */}
-      {modalIsOpen && (
-        <div className='modal'>
-          {/* TODO: ADD ABILITY TO UPDATE USERNAME */}
-          <form onSubmit={updatePassword}>
-            <label htmlFor='new-password'>Enter a new password</label>
-            <input
-              id='new-password'
-              type='password'
-              onChange={(e) => handleChange(e, 'newPassword')}
-              value={formData.newPassword}
-              minLength='8'
-              required
-            />
-            <label htmlFor='confirm-password'>Re-enter your password</label>
-            <input
-              id='confirm-password'
-              type='password'
-              onChange={(e) => handleChange(e, 'confirmPassword')}
-              value={formData.confirmPassword}
-              minLength='8'
-              required
-            />
-            {passwordsMatch || <div>Passwords do not match</div>}
-            <button>Submit</button>
-          </form>
-        </div>
-      )}
-      {/* PAGE */}
       <div>
+        {/* PAGE */}
         <h1>Settings</h1>
         <button onClick={toggleModal}>Change Password</button>
-        <button onClick={toggleConfirmation}>Delete Account</button>
+        <button
+          className='delete'
+          onClick={toggleConfirmation}
+        >
+          Delete Account
+        </button>
         {confirmationVisible && (
-          <div>
-            <div>Are you sure?</div>
-
+          <div className='modal'>
+            <h3>Are you sure?</h3>
             <div>
-              <button onClick={deleteAccount}>Yes, delete my account</button>
-              <button onClick={toggleConfirmation}>Cancel</button>
+              <button
+                className='delete'
+                onClick={deleteAccount}
+              >
+                Yes, delete my account
+              </button>
+              <button
+                className='cancel'
+                onClick={toggleConfirmation}
+              >
+                Cancel
+              </button>
             </div>
+          </div>
+        )}
+        {/* MODAL */}
+        {modalIsOpen && (
+          <div className='modal'>
+            {/* TODO: ADD ABILITY TO UPDATE USERNAME */}
+            <form onSubmit={updatePassword}>
+              <label htmlFor='new-password'>Enter a new password</label>
+              <input
+                id='new-password'
+                type='password'
+                onChange={(e) => handleChange(e, 'newPassword')}
+                value={formData.newPassword}
+                minLength='8'
+                required
+              />
+              <label htmlFor='confirm-password'>Re-enter your password</label>
+              <input
+                id='confirm-password'
+                type='password'
+                onChange={(e) => handleChange(e, 'confirmPassword')}
+                value={formData.confirmPassword}
+                minLength='8'
+                required
+              />
+              {passwordsMatch || <div>Passwords do not match</div>}
+              <button>Submit</button>
+            </form>
           </div>
         )}
       </div>

@@ -125,20 +125,19 @@ const Home = () => {
   }, []);
   return (
     <div id='homepage-div'>
-      <div id='Home'>Pitches</div>
-      {/* <div id="Home">Welcome, {localStorage.getItem('username')}</div> */}
-      <hr />
-      <div className='homepage-button-container'>
-        <button
-          className='filter-button'
-          onClick={() => setFilterPress(!filterPress)}
-        >
-          Filter
-        </button>
+      <div className='top'>
+        <div className='placeholder'></div>
+        <h1>Pitches</h1>
+        {/* <div id="Home">Welcome, {localStorage.getItem('username')}</div> */}
+        <div className='homepage-button-container'>
+          <button
+            className='filter-button'
+            onClick={() => setFilterPress(!filterPress)}
+          >
+            Filter
+          </button>
+        </div>
       </div>
-      {/* <div>
-        <span id="username"> Hello,  </span>
-      </div> */}
       {filterPress && <div className='filters'>{checkboxArr}</div>}
       <div className='project-card-container'>{filteredProjects}</div>
       <br></br>
