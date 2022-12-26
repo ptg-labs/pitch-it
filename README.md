@@ -11,6 +11,8 @@ Connect with developers to find the best team to collaborate on projects
 
 ## About
 Introducing Pitch It, a fullstack web-app built using React, Express, and PostgreSQL. Pitch it allows users to create projects, pitch their ideas to other developers, and recruit other developers based on their skillset. 
+
+
 <img width="420" alt="Pitch It" src="https://user-images.githubusercontent.com/112290188/209587295-10c747fd-8d12-4e8d-84ee-44542714bae9.png">
 
 ## Installing
